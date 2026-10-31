@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/YumeHime.png" alt="YumeHime" width="720" />
+  <img src="assets/YumeHime.png" alt="YumeHime" width="640" />
 </p>
 
 <p align="center">
