@@ -186,7 +186,6 @@ For more preset entries and usage details, see the [glossary guide](https://www.
 - `extension/`: Chrome MV3 extension for audio capture, UI, and glossary management.
 - `src/livesub/`: Python server for ASR, WebSocket connections, translation, and glossaries.
 - `scripts/`: Server configuration, Whisper build, and connectivity check scripts.
-- `docs/`: Design notes, glossary documentation, and development records.
 
 ## License
 

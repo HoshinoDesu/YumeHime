@@ -158,7 +158,7 @@ ssh -J root@中繼伺服器IP -N -L 8765:127.0.0.1:8765 root@目標伺服器IP
 [{"source": "切り抜き", "target": "切片", "aliases": []}]
 ```
 
-**CSV 格式：**包含 `source,target,aliases` 三欄，多個別名以 `|` 分隔。
+**CSV 格式**：包含 `source,target,aliases` 三欄，多個別名以 `|` 分隔。
 
 **欄位說明：**
 
@@ -186,7 +186,6 @@ ssh -J root@中繼伺服器IP -N -L 8765:127.0.0.1:8765 root@目標伺服器IP
 - `extension/`：Chrome MV3 瀏覽器擴充功能（音訊擷取、介面與詞庫管理）。
 - `src/livesub/`：Python 伺服器核心（語音辨識、WebSocket 服務、翻譯轉接與詞庫）。
 - `scripts/`：伺服器設定產生、Whisper 編譯與連線檢查腳本。
-- `docs/`：設計方案、詞庫文件與開發紀錄。
 
 ## 授權條款
 
