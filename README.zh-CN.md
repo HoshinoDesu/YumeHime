@@ -190,7 +190,6 @@ ssh -J root@中继服务器IP -N -L 8765:127.0.0.1:8765 root@目标服务器IP
 * `src/livesub/`：Python 服务端核心（ASR 识别、WebSocket 服务、翻译适配与词库）
 * `scripts/`：服务端配置生成、Whisper 编译与连通性测试脚本
 * `docs/`：设计方案、词库文档与开发记录
-* `models/`、`audio/`、`results/`：本地模型与测试产物（已忽略，不提交至 Git）
 
 ## 许可证
 
