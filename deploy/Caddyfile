@@ -1,0 +1,3 @@
+{$LIVESUB_DOMAIN} {
+    reverse_proxy livesub:8765
+}

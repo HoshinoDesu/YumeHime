@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "LiveSub",
+  "version": "0.2.3",
+  "minimum_chrome_version": "116",
+  "description": "自托管日语直播双语字幕",
+  "permissions": ["activeTab", "scripting", "storage", "tabCapture", "offscreen"],
+  "host_permissions": ["http://127.0.0.1/*", "http://localhost/*"],
+  "optional_host_permissions": ["https://*/*", "http://*/*"],
+  "background": {"service_worker": "background.js", "type": "module"},
+  "action": {"default_title": "LiveSub", "default_popup": "popup.html"},
+  "options_page": "options.html",
+  "content_security_policy": {"extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' ws://127.0.0.1:* ws://localhost:* wss://* https://* http://127.0.0.1:* http://localhost:*"}
+}

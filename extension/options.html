@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><link rel="stylesheet" href="style.css">
+<title>LiveSub 设置</title><body class="options"><h1>LiveSub</h1><form id="settings">
+<label>导入连接配置<input id="connection" type="file" accept=".json"></label>
+<label>服务器地址<input name="url" type="url" required placeholder="wss://subtitle.example.com/ws"></label>
+<label>网关访问令牌<input name="token" type="password" required autocomplete="off"></label>
+<label>翻译模型<input name="model" required></label>
+<label>界面语言<select name="uiLanguage"><option value="auto">跟随系统</option><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="en">English</option></select></label>
+<label>目标语言<select name="targetLanguage"><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="en">English</option></select></label>
+<label>本次使用的主播或游戏词库<input name="profiles" placeholder="streamer:arale,game:bandori"></label>
+<label>中文字幕字号<input name="fontSize" type="number" min="16" max="64"></label>
+<label>默认距底部（%）<input name="bottom" type="number" min="2" max="70"></label>
+<label>背景不透明度<input name="opacity" type="number" min="0" max="1" step="0.05"></label>
+<label>描边强度<select name="outlineWidth"><option value="0">无</option><option value="1">轻</option><option value="2">标准</option><option value="3">明显</option><option value="4">强</option></select></label>
+<div class="subtitle-preview" aria-label="字幕外观预览"><div class="preview-caption"><div class="ja">今日はちょっと寒いね。</div><div class="zh">今天有点冷呢。</div></div></div>
+<label class="check"><input name="showJapanese" type="checkbox">显示日文原文</label>
+<div class="actions"><label class="check"><input name="positionLocked" type="checkbox">锁定浮层位置</label><button id="reset-position" type="button" class="secondary">恢复默认位置</button></div>
+<div><button type="submit">保存设置</button></div></form><output id="status" aria-live="polite"></output><hr>
+<form id="glossary"><label>编辑词库<input id="profile" value="global" required></label>
+<label>词条（JSON）<textarea id="entries" spellcheck="false">[]</textarea></label>
+<div class="actions"><button id="load" type="button" class="secondary">读取</button><button type="submit">保存词库</button><button id="export" type="button" class="secondary">导出 JSON</button></div>
+<label>导入 CSV 或 JSON<input id="import" type="file" accept=".csv,.json"></label>
+</form><output id="glossary-status" aria-live="polite"></output><script src="options.js" type="module"></script></body></html>

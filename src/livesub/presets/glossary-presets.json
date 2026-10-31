@@ -1,0 +1,2746 @@
+{
+  "topic:VTuber": [
+    {
+      "source": "推し",
+      "target": "推",
+      "aliases": [],
+      "note": "喜欢并支持的主播、偶像或角色；不直译成推动。",
+      "variants": [
+        "おし"
+      ]
+    },
+    {
+      "source": "最推し",
+      "target": "本命",
+      "aliases": [],
+      "note": "最喜欢的一位；区别于单推。",
+      "variants": []
+    },
+    {
+      "source": "箱推し",
+      "target": "箱推",
+      "aliases": [],
+      "note": "喜欢并支持整个团体。",
+      "variants": []
+    },
+    {
+      "source": "単推し",
+      "target": "单推",
+      "aliases": [],
+      "note": "主要支持一位主播。",
+      "variants": []
+    },
+    {
+      "source": "推し活",
+      "target": "追推",
+      "aliases": [],
+      "note": "支持喜欢的主播或角色的活动；按句子自然表达。",
+      "variants": []
+    },
+    {
+      "source": "推し変",
+      "target": "换推",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "同担",
+      "target": "同担",
+      "aliases": [],
+      "note": "喜欢同一位主播或角色的人。",
+      "variants": []
+    },
+    {
+      "source": "てぇてぇ",
+      "target": "太贴贴了",
+      "aliases": [],
+      "note": "对互动或关系的感动和喜爱，不是普通敬语“尊贵”。",
+      "variants": [
+        "てえてえ"
+      ]
+    },
+    {
+      "source": "限界化",
+      "target": "激动到失控",
+      "aliases": [],
+      "note": "粉丝兴奋得语无伦次；不是体力耗尽。",
+      "variants": []
+    },
+    {
+      "source": "初見",
+      "target": "第一次来",
+      "aliases": [],
+      "note": "直播打招呼可译“第一次来看”；玩游戏时可指初见。",
+      "variants": []
+    },
+    {
+      "source": "初見さん",
+      "target": "第一次来的观众",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "常連",
+      "target": "老观众",
+      "aliases": [],
+      "note": "直播语境；商店语境为熟客。",
+      "variants": []
+    },
+    {
+      "source": "ROM専",
+      "target": "潜水党",
+      "aliases": [],
+      "note": "只看不发言的人。",
+      "variants": [
+        "ロム専"
+      ]
+    },
+    {
+      "source": "リスナー",
+      "target": "观众",
+      "aliases": [],
+      "note": "直播语境可用观众、大家；音频节目可用听众。",
+      "variants": []
+    },
+    {
+      "source": "配信枠",
+      "target": "直播间",
+      "aliases": [],
+      "note": "按语境也可指这一场直播。",
+      "variants": []
+    },
+    {
+      "source": "歌枠",
+      "target": "歌回",
+      "aliases": [],
+      "note": "唱歌直播。",
+      "variants": [
+        "うたわく"
+      ]
+    },
+    {
+      "source": "雑談枠",
+      "target": "杂谈回",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "ざつだんわく"
+      ]
+    },
+    {
+      "source": "朝活",
+      "target": "早间直播",
+      "aliases": [],
+      "note": "直播语境；生活语境是晨间活动。",
+      "variants": []
+    },
+    {
+      "source": "耐久配信",
+      "target": "耐久直播",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "凸待ち",
+      "target": "等人来连麦",
+      "aliases": [],
+      "note": "等待其他人主动来通话或联动。",
+      "variants": [
+        "とつまち"
+      ]
+    },
+    {
+      "source": "逆凸",
+      "target": "主动去连麦",
+      "aliases": [],
+      "note": "主播主动给别人打电话。",
+      "variants": [
+        "ぎゃくとつ"
+      ]
+    },
+    {
+      "source": "コラボ",
+      "target": "联动",
+      "aliases": [],
+      "note": "主播一起直播时用联动，商品合作时用联名。",
+      "variants": []
+    },
+    {
+      "source": "切り抜き",
+      "target": "切片",
+      "aliases": [],
+      "note": "直播精彩片段；手工语境可指剪下，不强制用直播义。",
+      "variants": [
+        "きりぬき"
+      ]
+    },
+    {
+      "source": "アーカイブ",
+      "target": "回放",
+      "aliases": [],
+      "note": "直播语境用回放；文件语境可用存档。",
+      "variants": []
+    },
+    {
+      "source": "同接",
+      "target": "同时在线人数",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "どうせつ"
+      ]
+    },
+    {
+      "source": "スパチャ",
+      "target": "SC",
+      "aliases": [],
+      "note": "直播付费留言，也可自然译“打赏”。",
+      "variants": []
+    },
+    {
+      "source": "スーパーチャット",
+      "target": "SC",
+      "aliases": [],
+      "note": "YouTube 付费醒目留言。",
+      "variants": []
+    },
+    {
+      "source": "スパチャ読み",
+      "target": "念SC",
+      "aliases": [],
+      "note": "读观众付费留言。",
+      "variants": []
+    },
+    {
+      "source": "メン限",
+      "target": "会员限定",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "メンバーシップ",
+      "target": "频道会员",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "メンギフ",
+      "target": "会员赠礼",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "待機所",
+      "target": "直播等待间",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "待機画面",
+      "target": "待机画面",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "音ズレ",
+      "target": "音画不同步",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "おとずれ"
+      ]
+    },
+    {
+      "source": "音割れ",
+      "target": "爆音",
+      "aliases": [],
+      "note": "声音过载失真，不是声音太小。",
+      "variants": []
+    },
+    {
+      "source": "ミュート",
+      "target": "静音",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "回線落ち",
+      "target": "掉线",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "枠ガチャ",
+      "target": "换直播间试试",
+      "aliases": [],
+      "note": "因连接问题重开直播的说法。",
+      "variants": []
+    },
+    {
+      "source": "新衣装",
+      "target": "新衣装",
+      "aliases": [],
+      "note": "主播的新造型或新服装。",
+      "variants": []
+    },
+    {
+      "source": "お披露目",
+      "target": "首次公开",
+      "aliases": [],
+      "note": "新衣装、模型等正式展示。",
+      "variants": [
+        "おひろめ"
+      ]
+    },
+    {
+      "source": "立ち絵",
+      "target": "立绘",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "たちえ"
+      ]
+    },
+    {
+      "source": "ファンネーム",
+      "target": "粉丝名",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ファンアート",
+      "target": "同人图",
+      "aliases": [],
+      "note": "粉丝创作的图画。",
+      "variants": []
+    },
+    {
+      "source": "同期",
+      "target": "同期",
+      "aliases": [],
+      "note": "同批出道者；不是自动翻译成同步。",
+      "variants": []
+    },
+    {
+      "source": "先輩",
+      "target": "前辈",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "後輩",
+      "target": "后辈",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "卒業",
+      "target": "毕业",
+      "aliases": [],
+      "note": "VTuber 语境可指退出活动；不自行添加原因。",
+      "variants": []
+    },
+    {
+      "source": "復帰",
+      "target": "回归",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "アンコール",
+      "target": "安可",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "セトリ",
+      "target": "歌单",
+      "aliases": [],
+      "note": "演出曲目表。",
+      "variants": []
+    },
+    {
+      "source": "歌ってみた",
+      "target": "翻唱",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "弾き語り",
+      "target": "自弹自唱",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "合いの手",
+      "target": "应援喊声",
+      "aliases": [],
+      "note": "歌曲间隙的呼应或捧场声。",
+      "variants": []
+    },
+    {
+      "source": "キー下げ",
+      "target": "降调",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "キー上げ",
+      "target": "升调",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "喉ケア",
+      "target": "护嗓",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ケモ耳",
+      "target": "兽耳",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "けもみみ",
+        "ケモミミ",
+        "ケモミ",
+        "ケモミン",
+        "けもみ"
+      ]
+    },
+    {
+      "source": "獣耳",
+      "target": "兽耳",
+      "aliases": [],
+      "note": "动物耳朵造型；读音近似时结合新衣装等话题判断。",
+      "variants": [
+        "けもみみ"
+      ]
+    },
+    {
+      "source": "猫耳",
+      "target": "猫耳",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "ねこみみ"
+      ]
+    },
+    {
+      "source": "狐耳",
+      "target": "狐耳",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "きつねみみ"
+      ]
+    },
+    {
+      "source": "おつかれさま",
+      "target": "辛苦啦",
+      "aliases": [],
+      "note": "下播告别可自然用“辛苦啦，拜拜”；不一律理解成劳累。",
+      "variants": [
+        "お疲れ様"
+      ]
+    },
+    {
+      "source": "おはよう",
+      "target": "早上好",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "おはよ"
+      ]
+    },
+    {
+      "source": "おかえり",
+      "target": "欢迎回来",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "お帰り"
+      ]
+    },
+    {
+      "source": "ただいま",
+      "target": "我回来了",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    }
+  ],
+  "topic:动漫与二次元": [
+    {
+      "source": "二次元",
+      "target": "二次元",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "にじげん"
+      ]
+    },
+    {
+      "source": "三次元",
+      "target": "三次元",
+      "aliases": [],
+      "note": "相对于二次元时指现实世界；数学情景按原义。",
+      "variants": []
+    },
+    {
+      "source": "アニメ",
+      "target": "动画",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "声優",
+      "target": "声优",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "せいゆう"
+      ]
+    },
+    {
+      "source": "原作",
+      "target": "原作",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "原作勢",
+      "target": "原作党",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "アニメ勢",
+      "target": "动画党",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ネタバレ",
+      "target": "剧透",
+      "aliases": [],
+      "note": "不要把词本身误当成在请求添加剧透。",
+      "variants": []
+    },
+    {
+      "source": "伏線",
+      "target": "伏笔",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "ふくせん"
+      ]
+    },
+    {
+      "source": "伏線回収",
+      "target": "收伏笔",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "神回",
+      "target": "神回",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "かみかい"
+      ]
+    },
+    {
+      "source": "日常回",
+      "target": "日常回",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "総集編",
+      "target": "总集篇",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "最終回",
+      "target": "最终话",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "続編",
+      "target": "续作",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "劇場版",
+      "target": "剧场版",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "作画",
+      "target": "作画",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "作画崩壊",
+      "target": "作画崩坏",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "キャラデザ",
+      "target": "角色设计",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "キャラソン",
+      "target": "角色歌",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "主題歌",
+      "target": "主题曲",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "挿入歌",
+      "target": "插曲",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "サントラ",
+      "target": "原声带",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ラノベ",
+      "target": "轻小说",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "同人誌",
+      "target": "同人本",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "どうじんし"
+      ]
+    },
+    {
+      "source": "同人",
+      "target": "同人",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "公式",
+      "target": "官方",
+      "aliases": [],
+      "note": "数学语境为公式，不能都译为官方。",
+      "variants": []
+    },
+    {
+      "source": "解釈一致",
+      "target": "理解一致",
+      "aliases": [],
+      "note": "对角色、关系等的理解与自己相同。",
+      "variants": []
+    },
+    {
+      "source": "解釈違い",
+      "target": "理解不同",
+      "aliases": [],
+      "note": "对角色等的理解不同，不等同于翻译错误。",
+      "variants": []
+    },
+    {
+      "source": "カップリング",
+      "target": "CP",
+      "aliases": [],
+      "note": "配对关系。",
+      "variants": []
+    },
+    {
+      "source": "尊い",
+      "target": "太美好了",
+      "aliases": [],
+      "note": "表达喜爱、感动；正式宗教或价值判断按原义。",
+      "variants": []
+    },
+    {
+      "source": "萌え",
+      "target": "萌",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "燃える",
+      "target": "热血起来了",
+      "aliases": [],
+      "note": "动画或比赛语境；火灾语境保持燃烧。",
+      "variants": []
+    },
+    {
+      "source": "沼",
+      "target": "坑",
+      "aliases": [],
+      "note": "沉迷作品的圈内说法；地理语境为沼泽。",
+      "variants": []
+    },
+    {
+      "source": "沼る",
+      "target": "入坑",
+      "aliases": [],
+      "note": "也可指越陷越深；游戏中卡关按语境。",
+      "variants": []
+    },
+    {
+      "source": "布教",
+      "target": "安利",
+      "aliases": [],
+      "note": "推荐作品；宗教语境仍为传教。",
+      "variants": []
+    },
+    {
+      "source": "聖地巡礼",
+      "target": "圣地巡礼",
+      "aliases": [],
+      "note": "去作品取景地等参访。",
+      "variants": []
+    },
+    {
+      "source": "グッズ",
+      "target": "周边",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "アクスタ",
+      "target": "亚克力立牌",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "缶バッジ",
+      "target": "徽章",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ぬいぐるみ",
+      "target": "玩偶",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ぬい",
+      "target": "玩偶",
+      "aliases": [],
+      "note": "相关周边语境；缝纫动词不用这个词义。",
+      "variants": []
+    },
+    {
+      "source": "ガチャガチャ",
+      "target": "扭蛋",
+      "aliases": [],
+      "note": "也可为杂乱声，依语境。",
+      "variants": []
+    },
+    {
+      "source": "ランダム封入",
+      "target": "随机封入",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "特典",
+      "target": "特典",
+      "aliases": [],
+      "note": "购买附赠品。",
+      "variants": []
+    },
+    {
+      "source": "受注生産",
+      "target": "接单生产",
+      "aliases": [],
+      "note": "按订单生产。",
+      "variants": []
+    },
+    {
+      "source": "再販",
+      "target": "再贩",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "転売",
+      "target": "倒卖",
+      "aliases": [],
+      "note": "按情景也可为转卖，不自行增加谴责。",
+      "variants": []
+    },
+    {
+      "source": "ツンデレ",
+      "target": "傲娇",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "クーデレ",
+      "target": "冷娇",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ヤンデレ",
+      "target": "病娇",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "幼なじみ",
+      "target": "青梅竹马",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "おさななじみ"
+      ]
+    },
+    {
+      "source": "ギャップ萌え",
+      "target": "反差萌",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "擬人化",
+      "target": "拟人化",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "擬獣化",
+      "target": "兽化",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "コスプレ",
+      "target": "角色扮演",
+      "aliases": [],
+      "note": "装扮、cosplay。",
+      "variants": []
+    },
+    {
+      "source": "仮装",
+      "target": "变装",
+      "aliases": [],
+      "note": "万圣节语境常指装扮，不是虚拟世界。",
+      "variants": [
+        "かそう"
+      ]
+    },
+    {
+      "source": "ケモナー",
+      "target": "兽控",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "マスコット",
+      "target": "吉祥物",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ボカロ",
+      "target": "Vocaloid",
+      "aliases": [],
+      "note": "也可泛指相关虚拟歌手音乐；按话题。",
+      "variants": []
+    },
+    {
+      "source": "ボーカロイド",
+      "target": "Vocaloid",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    }
+  ],
+  "topic:日常生活": [
+    {
+      "source": "寝不足",
+      "target": "没睡够",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "ねぶそく"
+      ]
+    },
+    {
+      "source": "寝落ち",
+      "target": "睡着了",
+      "aliases": [],
+      "note": "本来还在看直播、做事等却睡着。",
+      "variants": [
+        "ねおち"
+      ]
+    },
+    {
+      "source": "二度寝",
+      "target": "睡回笼觉",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "にどね"
+      ]
+    },
+    {
+      "source": "寝坊",
+      "target": "睡过头",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "ねぼう"
+      ]
+    },
+    {
+      "source": "夜更かし",
+      "target": "熬夜",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "よふかし"
+      ]
+    },
+    {
+      "source": "徹夜",
+      "target": "通宵",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "てつや"
+      ]
+    },
+    {
+      "source": "昼寝",
+      "target": "午睡",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "ひるね"
+      ]
+    },
+    {
+      "source": "寝起き",
+      "target": "刚睡醒",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "ねおき"
+      ]
+    },
+    {
+      "source": "眠たい",
+      "target": "有点困",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "ねむたい"
+      ]
+    },
+    {
+      "source": "ぼーっとする",
+      "target": "脑袋迷迷糊糊的",
+      "aliases": [],
+      "note": "也可能为发呆；不自行推断疾病。",
+      "variants": [
+        "ぼうっとする"
+      ]
+    },
+    {
+      "source": "ぽわっとする",
+      "target": "迷迷糊糊的",
+      "aliases": [],
+      "note": "脑袋没清醒、飘忽的感觉；按话题判断。",
+      "variants": [
+        "ポワッとする",
+        "ふわっとする"
+      ]
+    },
+    {
+      "source": "寝れた",
+      "target": "睡着了",
+      "aliases": [],
+      "note": "根据时态和语境用睡得着、睡过了；区别于入れた。",
+      "variants": [
+        "ねれた"
+      ]
+    },
+    {
+      "source": "寝られた",
+      "target": "睡得着",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "ねられた"
+      ]
+    },
+    {
+      "source": "お腹すいた",
+      "target": "肚子饿了",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "おなかすいた",
+        "腹減った"
+      ]
+    },
+    {
+      "source": "小腹がすく",
+      "target": "有点饿",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "満腹",
+      "target": "吃饱了",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "まんぷく"
+      ]
+    },
+    {
+      "source": "腹持ち",
+      "target": "耐饿",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "はらもち"
+      ]
+    },
+    {
+      "source": "食べ過ぎ",
+      "target": "吃多了",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "自炊",
+      "target": "自己做饭",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "じすい"
+      ]
+    },
+    {
+      "source": "作り置き",
+      "target": "提前做好的饭菜",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "つくりおき"
+      ]
+    },
+    {
+      "source": "外食",
+      "target": "下馆子",
+      "aliases": [],
+      "note": "按语境可用在外面吃。",
+      "variants": []
+    },
+    {
+      "source": "出前",
+      "target": "外卖",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "でまえ"
+      ]
+    },
+    {
+      "source": "コンビニ",
+      "target": "便利店",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "スーパー",
+      "target": "超市",
+      "aliases": [],
+      "note": "购物语境；其他情形按原义。",
+      "variants": []
+    },
+    {
+      "source": "レジ袋",
+      "target": "购物袋",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "冷凍食品",
+      "target": "冷冻食品",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "お惣菜",
+      "target": "熟食",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "そうざい"
+      ]
+    },
+    {
+      "source": "味見",
+      "target": "尝尝味道",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "あじみ"
+      ]
+    },
+    {
+      "source": "薄味",
+      "target": "口味淡",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "うすあじ"
+      ]
+    },
+    {
+      "source": "濃い味",
+      "target": "口味重",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "おかわり",
+      "target": "再来一份",
+      "aliases": [],
+      "note": "按食物饮料可用添饭、续杯。",
+      "variants": []
+    },
+    {
+      "source": "炊きたて",
+      "target": "刚煮好的",
+      "aliases": [],
+      "note": "通常形容米饭。",
+      "variants": []
+    },
+    {
+      "source": "片付け",
+      "target": "收拾",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "かたづけ"
+      ]
+    },
+    {
+      "source": "洗い物",
+      "target": "要洗的餐具",
+      "aliases": [],
+      "note": "也可指洗餐具这件事。",
+      "variants": []
+    },
+    {
+      "source": "洗濯物",
+      "target": "洗的衣服",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "せんたくもの"
+      ]
+    },
+    {
+      "source": "部屋干し",
+      "target": "室内晾衣",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ゴミ出し",
+      "target": "扔垃圾",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "湯船",
+      "target": "浴缸",
+      "aliases": [],
+      "note": "按语境可为浴缸里的热水。",
+      "variants": [
+        "ゆぶね"
+      ]
+    },
+    {
+      "source": "お風呂",
+      "target": "洗澡",
+      "aliases": [],
+      "note": "按语境可为浴室、泡澡。",
+      "variants": [
+        "おふろ"
+      ]
+    },
+    {
+      "source": "半身浴",
+      "target": "半身浴",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "湯冷め",
+      "target": "洗澡后着凉",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "肩こり",
+      "target": "肩膀酸僵",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "かたこり"
+      ]
+    },
+    {
+      "source": "筋肉痛",
+      "target": "肌肉酸痛",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "口内炎",
+      "target": "口腔溃疡",
+      "aliases": [],
+      "note": "只有明确说口内炎时采用，不把“嘴里疼”诊断成溃疡。",
+      "variants": [
+        "こうないえん"
+      ]
+    },
+    {
+      "source": "口内が痛い",
+      "target": "嘴里疼",
+      "aliases": [],
+      "note": "不自行诊断具体病症。",
+      "variants": []
+    },
+    {
+      "source": "喉が枯れる",
+      "target": "嗓子哑了",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "鼻声",
+      "target": "鼻音",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "はなごえ"
+      ]
+    },
+    {
+      "source": "冷え性",
+      "target": "怕冷",
+      "aliases": [],
+      "note": "按语境可说手脚容易冰凉，不添加医学诊断。",
+      "variants": []
+    },
+    {
+      "source": "花粉症",
+      "target": "花粉过敏",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "乾燥",
+      "target": "干燥",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "加湿器",
+      "target": "加湿器",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "暖房",
+      "target": "暖气",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "だんぼう"
+      ]
+    },
+    {
+      "source": "冷房",
+      "target": "冷气",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "れいぼう"
+      ]
+    },
+    {
+      "source": "衣替え",
+      "target": "换季换衣",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "ころもがえ"
+      ]
+    },
+    {
+      "source": "重ね着",
+      "target": "叠穿",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "羽織る",
+      "target": "披一件",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "はおる"
+      ]
+    },
+    {
+      "source": "すっぴん",
+      "target": "素颜",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "日焼け止め",
+      "target": "防晒",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "寝癖",
+      "target": "睡乱的头发",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "ねぐせ"
+      ]
+    },
+    {
+      "source": "前髪",
+      "target": "刘海",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "まえがみ"
+      ]
+    },
+    {
+      "source": "毛先",
+      "target": "发梢",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "けさき"
+      ]
+    },
+    {
+      "source": "通勤",
+      "target": "通勤",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "終電",
+      "target": "末班车",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "しゅうでん"
+      ]
+    },
+    {
+      "source": "乗り換え",
+      "target": "换乘",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "のりかえ"
+      ]
+    },
+    {
+      "source": "寄り道",
+      "target": "绕道逛逛",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "よりみち"
+      ]
+    },
+    {
+      "source": "買い出し",
+      "target": "买东西备货",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "取り置き",
+      "target": "帮忙留货",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "置き配",
+      "target": "放门口配送",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "再配達",
+      "target": "重新配送",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "お裾分け",
+      "target": "分给别人一点",
+      "aliases": [],
+      "note": "把吃的或收到的东西分享给别人。",
+      "variants": [
+        "おすそわけ"
+      ]
+    },
+    {
+      "source": "ドタキャン",
+      "target": "临时取消",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "待ち合わせ",
+      "target": "约好碰面",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "お先に失礼します",
+      "target": "我先走啦",
+      "aliases": [],
+      "note": "场合正式时保留礼貌。",
+      "variants": []
+    },
+    {
+      "source": "お邪魔します",
+      "target": "打扰啦",
+      "aliases": [],
+      "note": "进别人家等场合。",
+      "variants": []
+    },
+    {
+      "source": "いただきます",
+      "target": "我开动啦",
+      "aliases": [],
+      "note": "用餐前；接受东西时按场合译。",
+      "variants": []
+    },
+    {
+      "source": "ごちそうさま",
+      "target": "谢谢款待",
+      "aliases": [],
+      "note": "饭后也可自然用“吃饱啦”，看原话语气。",
+      "variants": [
+        "ご馳走様"
+      ]
+    },
+    {
+      "source": "行ってきます",
+      "target": "我出门啦",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "いってきます"
+      ]
+    },
+    {
+      "source": "行ってらっしゃい",
+      "target": "路上小心",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "いってらっしゃい"
+      ]
+    }
+  ],
+  "topic:口语与网络用语": [
+    {
+      "source": "やばい",
+      "target": "太夸张了",
+      "aliases": [],
+      "note": "正面可用厉害、绝了；负面可用糟了、危险。必须看上下文，不固定成同一个词。",
+      "variants": [
+        "ヤバい",
+        "やば",
+        "ヤバ"
+      ]
+    },
+    {
+      "source": "えぐい",
+      "target": "太狠了",
+      "aliases": [],
+      "note": "可赞叹强得离谱，也可表示残酷、过分；不固定为恶心。",
+      "variants": [
+        "エグい",
+        "えぐ"
+      ]
+    },
+    {
+      "source": "大丈夫",
+      "target": "没事",
+      "aliases": [],
+      "note": "安慰、询问情况可用没事、可以；拒绝提议时可能是不用了，按上一句判断。",
+      "variants": [
+        "だいじょうぶ"
+      ]
+    },
+    {
+      "source": "結構です",
+      "target": "不用了",
+      "aliases": [],
+      "note": "回应邀约或提供东西时常是婉拒；表示足够、满意时按原义。",
+      "variants": []
+    },
+    {
+      "source": "いいです",
+      "target": "可以",
+      "aliases": [],
+      "note": "接受、允许时为可以；拒绝提供时可能是不用了。",
+      "variants": []
+    },
+    {
+      "source": "ちょっと",
+      "target": "有点",
+      "aliases": [],
+      "note": "可表示稍微、等一下或委婉拒绝，不逐字固定。",
+      "variants": []
+    },
+    {
+      "source": "なんか",
+      "target": "总觉得",
+      "aliases": [],
+      "note": "口语填充可少译；也可为某种东西，不总是“什么”。",
+      "variants": []
+    },
+    {
+      "source": "なんだろう",
+      "target": "怎么回事呢",
+      "aliases": [],
+      "note": "困惑时的自问；不译成“要变成什么”。",
+      "variants": [
+        "なんになろう"
+      ]
+    },
+    {
+      "source": "ていうか",
+      "target": "话说",
+      "aliases": [],
+      "note": "也可用“倒不如说”，保留转话题语气。",
+      "variants": [
+        "てか",
+        "っていうか"
+      ]
+    },
+    {
+      "source": "とりあえず",
+      "target": "总之先",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "一応",
+      "target": "姑且",
+      "aliases": [],
+      "note": "也可用算是、以防万一；按语境。",
+      "variants": []
+    },
+    {
+      "source": "普通に",
+      "target": "其实挺",
+      "aliases": [],
+      "note": "强调时自然表达，不总是“普通地”。",
+      "variants": []
+    },
+    {
+      "source": "逆に",
+      "target": "反而",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "まじ",
+      "target": "真的",
+      "aliases": [],
+      "note": "惊讶可译“真的假的”，强调可译“真”。",
+      "variants": [
+        "マジ",
+        "まじで",
+        "マジで"
+      ]
+    },
+    {
+      "source": "ガチ",
+      "target": "认真",
+      "aliases": [],
+      "note": "也可表示真的、来真的，根据搭配。",
+      "variants": [
+        "がち"
+      ]
+    },
+    {
+      "source": "ガチで",
+      "target": "真的",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ワンチャン",
+      "target": "说不定有机会",
+      "aliases": [],
+      "note": "可能性或机会，不译成小狗。",
+      "variants": [
+        "わんちゃん"
+      ]
+    },
+    {
+      "source": "それな",
+      "target": "就是啊",
+      "aliases": [],
+      "note": "赞同别人的话。",
+      "variants": []
+    },
+    {
+      "source": "わかる",
+      "target": "懂了",
+      "aliases": [],
+      "note": "赞同感受时可用我懂、太懂了；询问信息时按原义。",
+      "variants": []
+    },
+    {
+      "source": "なるほど",
+      "target": "原来如此",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "たしかに",
+      "target": "确实",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "そういうこと",
+      "target": "原来是这样",
+      "aliases": [],
+      "note": "解释、确认时按句式。",
+      "variants": []
+    },
+    {
+      "source": "知らんけど",
+      "target": "我也不确定",
+      "aliases": [],
+      "note": "句尾的轻松保留，不硬译成毫不知情。",
+      "variants": []
+    },
+    {
+      "source": "草",
+      "target": "笑死",
+      "aliases": [],
+      "note": "只有网络笑声语境才用；植物、草地仍译草。",
+      "variants": []
+    },
+    {
+      "source": "草生える",
+      "target": "笑死我了",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "じわる",
+      "target": "越想越好笑",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ツボる",
+      "target": "戳中笑点",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "腹筋崩壊",
+      "target": "笑到肚子疼",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "しんどい",
+      "target": "吃不消",
+      "aliases": [],
+      "note": "可能是累、难受或喜欢到受不了，不一律译痛苦。",
+      "variants": []
+    },
+    {
+      "source": "だるい",
+      "target": "好累",
+      "aliases": [],
+      "note": "也可能是嫌麻烦、没劲；看话题。",
+      "variants": []
+    },
+    {
+      "source": "無理",
+      "target": "不行了",
+      "aliases": [],
+      "note": "困难或拒绝可译做不到；激动夸赞可译受不了了。",
+      "variants": []
+    },
+    {
+      "source": "無理ゲー",
+      "target": "太难了",
+      "aliases": [],
+      "note": "很难完成的局面，不必一定是游戏。",
+      "variants": []
+    },
+    {
+      "source": "詰んだ",
+      "target": "没救了",
+      "aliases": [],
+      "note": "走投无路、无解；不译成装满。",
+      "variants": []
+    },
+    {
+      "source": "終わった",
+      "target": "完了",
+      "aliases": [],
+      "note": "也可能只是结束了，不能总译成绝望。",
+      "variants": []
+    },
+    {
+      "source": "助かる",
+      "target": "帮大忙了",
+      "aliases": [],
+      "note": "赞赏福利时可用太好了，不强行译成获救。",
+      "variants": []
+    },
+    {
+      "source": "ありがたい",
+      "target": "太感谢了",
+      "aliases": [],
+      "note": "按语境可用真好、帮大忙。",
+      "variants": []
+    },
+    {
+      "source": "おもろい",
+      "target": "好好笑",
+      "aliases": [],
+      "note": "也可能有趣，不总是搞笑。",
+      "variants": []
+    },
+    {
+      "source": "おもろ",
+      "target": "好好笑",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "めっちゃ",
+      "target": "特别",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "めちゃくちゃ",
+      "target": "特别",
+      "aliases": [],
+      "note": "修饰程度时用特别；混乱时用乱七八糟。",
+      "variants": []
+    },
+    {
+      "source": "めちゃ",
+      "target": "超",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "むずい",
+      "target": "好难",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "うまい",
+      "target": "好厉害",
+      "aliases": [],
+      "note": "食物好吃、技术熟练或做得巧妙，按话题。",
+      "variants": [
+        "うめえ"
+      ]
+    },
+    {
+      "source": "うそでしょ",
+      "target": "真的假的",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "嘘じゃん",
+      "target": "不是吧",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "えーっと",
+      "target": "那个",
+      "aliases": [],
+      "note": "犹豫填充，不当作实义词。",
+      "variants": [
+        "えっと"
+      ]
+    },
+    {
+      "source": "やっぱり",
+      "target": "果然",
+      "aliases": [],
+      "note": "也可为还是，按转折。",
+      "variants": [
+        "やっぱ"
+      ]
+    },
+    {
+      "source": "さすが",
+      "target": "不愧是",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "むしろ",
+      "target": "倒不如说",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "一旦",
+      "target": "先",
+      "aliases": [],
+      "note": "暂时、先做某事，不总译成一旦。",
+      "variants": []
+    },
+    {
+      "source": "地味に",
+      "target": "其实还挺",
+      "aliases": [],
+      "note": "不明显但实际如此；不固定为朴素地。",
+      "variants": []
+    },
+    {
+      "source": "地雷",
+      "target": "雷点",
+      "aliases": [],
+      "note": "圈内指讨厌的元素；战斗语境仍译地雷。",
+      "variants": []
+    },
+    {
+      "source": "刺さる",
+      "target": "戳中喜好",
+      "aliases": [],
+      "note": "作品或话语打动人；物理刺入按原义。",
+      "variants": []
+    },
+    {
+      "source": "エモい",
+      "target": "好有感觉",
+      "aliases": [],
+      "note": "有情绪、有回忆感，不固定成悲伤。",
+      "variants": []
+    },
+    {
+      "source": "気まずい",
+      "target": "好尴尬",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "あるある",
+      "target": "太常见了",
+      "aliases": [],
+      "note": "表示“确实经常这样”的共鸣。",
+      "variants": []
+    },
+    {
+      "source": "フラグ",
+      "target": "伏笔",
+      "aliases": [],
+      "note": "预示后果的梗；程序或游戏标志按原义。",
+      "variants": []
+    },
+    {
+      "source": "フラグ回収",
+      "target": "应验了",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ノリ",
+      "target": "气氛",
+      "aliases": [],
+      "note": "可为兴致、玩笑的劲头；不固定为海苔。",
+      "variants": []
+    },
+    {
+      "source": "ボケ",
+      "target": "抛梗",
+      "aliases": [],
+      "note": "漫才、互动语境；辱骂或其他含义看话题。",
+      "variants": []
+    },
+    {
+      "source": "ツッコミ",
+      "target": "吐槽",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "スパルタ",
+      "target": "魔鬼训练",
+      "aliases": [],
+      "note": "严格、严厉的训练或教学；历史地名按原义。",
+      "variants": []
+    },
+    {
+      "source": "神",
+      "target": "神了",
+      "aliases": [],
+      "note": "夸赞极好时用；宗教角色按原义。",
+      "variants": []
+    },
+    {
+      "source": "沼った",
+      "target": "越陷越深",
+      "aliases": [],
+      "note": "喜欢作品是入坑；游戏失败反复是卡住了。",
+      "variants": []
+    },
+    {
+      "source": "すみません",
+      "target": "不好意思",
+      "aliases": [],
+      "note": "道歉、打扰、感谢帮助三种用途，按场合。",
+      "variants": []
+    },
+    {
+      "source": "すまん",
+      "target": "抱歉啦",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ごめん",
+      "target": "抱歉",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "どんまい",
+      "target": "别在意",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "お疲れ",
+      "target": "辛苦了",
+      "aliases": [],
+      "note": "告别、慰问时自然表达。",
+      "variants": []
+    },
+    {
+      "source": "よいしょ",
+      "target": "嘿咻",
+      "aliases": [],
+      "note": "用力或转换动作时的感叹。",
+      "variants": [
+        "おいしょ"
+      ]
+    },
+    {
+      "source": "よっしゃ",
+      "target": "好嘞",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "えらい",
+      "target": "真棒",
+      "aliases": [],
+      "note": "夸做到了某事时用；也可为地位高或严重，按话题。",
+      "variants": []
+    },
+    {
+      "source": "かわいい",
+      "target": "好可爱",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "かっこいい",
+      "target": "好帅",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "好き",
+      "target": "喜欢",
+      "aliases": [],
+      "note": "不要自行补成告白、恋爱或姓名。",
+      "variants": []
+    },
+    {
+      "source": "大好き",
+      "target": "最喜欢了",
+      "aliases": [],
+      "note": "不补原文没有的对象。",
+      "variants": []
+    },
+    {
+      "source": "ありがとう",
+      "target": "谢谢",
+      "aliases": [],
+      "note": "表达感谢，不改写成赞美。",
+      "variants": [
+        "ありがと"
+      ]
+    },
+    {
+      "source": "はい",
+      "target": "好",
+      "aliases": [],
+      "note": "答应、附和、回应点名分别用好、嗯、在等，不强行固定。",
+      "variants": []
+    },
+    {
+      "source": "うん",
+      "target": "嗯",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "いや",
+      "target": "不是",
+      "aliases": [],
+      "note": "反驳、犹豫、感叹等多种用法，不总译“不”。",
+      "variants": []
+    },
+    {
+      "source": "なんでもない",
+      "target": "没什么",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "気のせい",
+      "target": "错觉",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "勘違い",
+      "target": "误会",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "思い出した",
+      "target": "想起来了",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "いや、そうなんですよ",
+      "target": "对啊，就是这样",
+      "note": "这里开头的いや是语气词，整体表示认同或强调，不是否定；按说话语气自然表达。",
+      "variants": [
+        "いやそうなんですよ"
+      ],
+      "aliases": []
+    }
+  ],
+  "topic:游戏": [
+    {
+      "source": "ガチャ",
+      "target": "抽卡",
+      "aliases": [],
+      "note": "扭蛋商品语境用扭蛋。",
+      "variants": []
+    },
+    {
+      "source": "単発",
+      "target": "单抽",
+      "aliases": [],
+      "note": "抽卡语境；其他场合可指单次。",
+      "variants": []
+    },
+    {
+      "source": "十連",
+      "target": "十连",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "じゅうれん"
+      ]
+    },
+    {
+      "source": "天井",
+      "target": "保底",
+      "aliases": [],
+      "note": "抽卡语境；建筑语境为天花板。",
+      "variants": []
+    },
+    {
+      "source": "すり抜け",
+      "target": "歪了",
+      "aliases": [],
+      "note": "抽卡没有出目标卡；动作语境为穿过。",
+      "variants": []
+    },
+    {
+      "source": "ピックアップ",
+      "target": "概率UP",
+      "aliases": [],
+      "note": "抽卡语境；其他场合可用挑选、重点介绍。",
+      "variants": []
+    },
+    {
+      "source": "リセマラ",
+      "target": "刷初始",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "無課金",
+      "target": "零氪",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "微課金",
+      "target": "微氪",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "課金",
+      "target": "氪金",
+      "aliases": [],
+      "note": "付费；其他业务按原义。",
+      "variants": []
+    },
+    {
+      "source": "完凸",
+      "target": "满突破",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "かんとつ"
+      ]
+    },
+    {
+      "source": "限界突破",
+      "target": "突破",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ナーフ",
+      "target": "削弱",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "バフ",
+      "target": "增益",
+      "aliases": [],
+      "note": "也可为加强；按技能或版本变更。",
+      "variants": []
+    },
+    {
+      "source": "デバフ",
+      "target": "减益",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "クールタイム",
+      "target": "冷却时间",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "クールダウン",
+      "target": "冷却",
+      "aliases": [],
+      "note": "游戏语境。",
+      "variants": []
+    },
+    {
+      "source": "リキャスト",
+      "target": "技能冷却",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ヘイト",
+      "target": "仇恨",
+      "aliases": [],
+      "note": "游戏怪物机制；日常语境可为敌意或仇恨言论。",
+      "variants": []
+    },
+    {
+      "source": "タゲ",
+      "target": "目标",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "タンク",
+      "target": "坦克",
+      "aliases": [],
+      "note": "承伤职业；载具语境用坦克车。",
+      "variants": []
+    },
+    {
+      "source": "ヒーラー",
+      "target": "治疗",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "サポート",
+      "target": "辅助",
+      "aliases": [],
+      "note": "角色定位时；其他情形为支持或帮助。",
+      "variants": []
+    },
+    {
+      "source": "火力",
+      "target": "输出",
+      "aliases": [],
+      "note": "也可用火力，不自动添加角色。",
+      "variants": []
+    },
+    {
+      "source": "会心",
+      "target": "暴击",
+      "aliases": [],
+      "note": "游戏属性；其他语境按原义。",
+      "variants": []
+    },
+    {
+      "source": "クリティカル",
+      "target": "暴击",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "確定会心",
+      "target": "必定暴击",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "耐久",
+      "target": "生存能力",
+      "aliases": [],
+      "note": "游戏属性；长时间挑战可能是耐久。",
+      "variants": []
+    },
+    {
+      "source": "立ち回り",
+      "target": "打法",
+      "aliases": [],
+      "note": "对局行动、策略。",
+      "variants": []
+    },
+    {
+      "source": "エイム",
+      "target": "瞄准",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "リコイル",
+      "target": "后坐力",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "当たり判定",
+      "target": "命中判定",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "被弾",
+      "target": "挨打",
+      "aliases": [],
+      "note": "被攻击命中。",
+      "variants": []
+    },
+    {
+      "source": "回避",
+      "target": "闪避",
+      "aliases": [],
+      "note": "游戏技能；一般生活按原义。",
+      "variants": []
+    },
+    {
+      "source": "無敵時間",
+      "target": "无敌时间",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ゴリ押し",
+      "target": "硬打过去",
+      "aliases": [],
+      "note": "不靠细节直接强行过关。",
+      "variants": []
+    },
+    {
+      "source": "初見殺し",
+      "target": "初见杀",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "即死",
+      "target": "秒杀",
+      "aliases": [],
+      "note": "按主被动可为当场死亡。",
+      "variants": []
+    },
+    {
+      "source": "全滅",
+      "target": "团灭",
+      "aliases": [],
+      "note": "队伍全灭；非队伍语境按原义。",
+      "variants": []
+    },
+    {
+      "source": "リスポーン",
+      "target": "重生",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "リトライ",
+      "target": "重试",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "セーブ",
+      "target": "存档",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "オートセーブ",
+      "target": "自动存档",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ロード",
+      "target": "读档",
+      "aliases": [],
+      "note": "游戏存档；资源场景可为加载。",
+      "variants": []
+    },
+    {
+      "source": "周回",
+      "target": "刷本",
+      "aliases": [],
+      "note": "重复关卡或路线。",
+      "variants": []
+    },
+    {
+      "source": "縛りプレイ",
+      "target": "限制玩法",
+      "aliases": [],
+      "note": "自行限制规则挑战。",
+      "variants": []
+    },
+    {
+      "source": "ノーダメ",
+      "target": "无伤",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ノーミス",
+      "target": "零失误",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "フルコン",
+      "target": "全连",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "判定",
+      "target": "判定",
+      "aliases": [],
+      "note": "音游的节拍判定等。",
+      "variants": []
+    },
+    {
+      "source": "譜面",
+      "target": "谱面",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "ふめん"
+      ]
+    },
+    {
+      "source": "コンボ",
+      "target": "连击",
+      "aliases": [],
+      "note": "音游可用连击、连段，依玩家用语。",
+      "variants": []
+    },
+    {
+      "source": "音ゲー",
+      "target": "音游",
+      "aliases": [],
+      "note": "",
+      "variants": [
+        "おとげー"
+      ]
+    },
+    {
+      "source": "ランクマ",
+      "target": "排位赛",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "野良",
+      "target": "路人",
+      "aliases": [],
+      "note": "随机匹配的玩家；动物语境为野生、流浪。",
+      "variants": []
+    },
+    {
+      "source": "味方",
+      "target": "队友",
+      "aliases": [],
+      "note": "对局语境；一般含义为支持自己的一方。",
+      "variants": []
+    },
+    {
+      "source": "キャリー",
+      "target": "带飞",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "戦犯",
+      "target": "背锅位",
+      "aliases": [],
+      "note": "游戏中造成失利的人；历史语境保持战犯。",
+      "variants": []
+    },
+    {
+      "source": "沼プレイ",
+      "target": "下饭操作",
+      "aliases": [],
+      "note": "操作失误；不做人身攻击式夸张。",
+      "variants": []
+    },
+    {
+      "source": "ラグ",
+      "target": "延迟",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "カクつく",
+      "target": "卡顿",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "同期ズレ",
+      "target": "不同步",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "バグ",
+      "target": "BUG",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "グリッチ",
+      "target": "漏洞",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "パッチ",
+      "target": "补丁",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "マッチング",
+      "target": "匹配",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "フレンド申請",
+      "target": "好友申请",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "協力プレイ",
+      "target": "合作游玩",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "対戦",
+      "target": "对战",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "チュートリアル",
+      "target": "新手教程",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "実績",
+      "target": "成就",
+      "aliases": [],
+      "note": "游戏解锁项目；职场语境用业绩、成果。",
+      "variants": []
+    },
+    {
+      "source": "トロフィー",
+      "target": "奖杯",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ボス戦",
+      "target": "Boss战",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "ラスボス",
+      "target": "最终Boss",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "裏ボス",
+      "target": "隐藏Boss",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    },
+    {
+      "source": "イベント復刻",
+      "target": "活动复刻",
+      "aliases": [],
+      "note": "",
+      "variants": []
+    }
+  ]
+}

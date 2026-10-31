@@ -1,0 +1,11 @@
+.git
+.env
+client.local.json
+.venv
+models
+audio
+results
+data
+docs
+vendor
+**/__pycache__

@@ -1,0 +1,31 @@
+services:
+  livesub:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      LIVESUB_MODELS: /app/models
+      LIVESUB_DATABASE: /app/data/livesub.sqlite3
+    ports:
+      - "127.0.0.1:8765:8765"
+    volumes:
+      - ./models:/app/models:ro
+      - livesub-data:/app/data
+    mem_limit: 4g
+    cpus: 3.5
+  caddy:
+    image: caddy:2
+    profiles: [wss]
+    restart: unless-stopped
+    environment:
+      LIVESUB_DOMAIN: ${LIVESUB_DOMAIN:-localhost}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+    depends_on: [livesub]
+volumes:
+  livesub-data:
+  caddy-data:
