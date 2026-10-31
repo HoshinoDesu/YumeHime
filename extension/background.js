@@ -24,7 +24,7 @@ async function stateFor(tabId) {
   return { visible: !!saved.panels?.[tabId], ...(saved.tabId === tabId ? saved.captureState : { running: false, paused: false }) };
 }
 async function inject(tabId) {
-  await chrome.scripting.executeScript({ target: { tabId }, files: ["i18n.js", "content.js"] });
+  await chrome.scripting.executeScript({ target: { tabId }, files: ["i18n.js", "icons.js", "content.js"] });
   await toTab(tabId, { type: "settings", settings: await settings() });
 }
 async function stop() {

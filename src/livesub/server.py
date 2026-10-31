@@ -46,7 +46,7 @@ async def lifespan(app):
     app.state.executor.shutdown(wait=True, cancel_futures=True)
 
 
-app = FastAPI(title="LiveSub", lifespan=lifespan, docs_url=None, redoc_url=None)
+app = FastAPI(title="YumeHime", lifespan=lifespan, docs_url=None, redoc_url=None)
 
 
 def authorize(authorization: str = Header(default="")):

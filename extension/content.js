@@ -8,15 +8,7 @@
   host.lang = "zh-CN";
   host.style.cssText = "position:fixed;inset:0;pointer-events:none;z-index:2147483647";
   const shadow = host.attachShadow({ mode: "open" });
-  const icons = {
-    grip: '<path d="M7 4h.01M13 4h.01M7 10h.01M13 10h.01M7 16h.01M13 16h.01" stroke-width="3"/>',
-    close: '<path d="m5 5 10 10M15 5 5 15"/>',
-    lock: '<rect x="4.5" y="8.5" width="11" height="8" rx="2"/><path d="M7 8.5V5a3 3 0 0 1 6 0v3.5M10 12v1.5"/>',
-    reset: '<path d="M4 8a6 6 0 1 1 0 5M4 3v5h5"/>',
-    gear: '<circle cx="10" cy="10" r="3"/><path d="M10 2v2m0 12v2M2 10h2m12 0h2M4.3 4.3l1.4 1.4m8.6 8.6 1.4 1.4M4.3 15.7l1.4-1.4m8.6-8.6 1.4-1.4"/>',
-    resize: '<path d="m8 16 8-8m-3 8 3-3"/>'
-  };
-  const icon = name => `<svg viewBox="0 0 20 20" aria-hidden="true">${icons[name]}</svg>`;
+  const icon = globalThis.YumeHimeIcons.svg;
   shadow.innerHTML = `<style>
     :host { all:initial;color-scheme:light dark;--font:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;--surface:255 255 255;--text:#202020;--muted:#747474;--border:#00000018;--field:#00000007;--hover:#0000000b;--action:#242424;--action-text:#fff;--edge:#fff;--size:32px;--opacity:.6;--subtitle-shadow:0 0 2px var(--edge),0 0 2px var(--edge); }
     @media (prefers-color-scheme:dark) { :host { --surface:22 22 22;--text:#f4f4f4;--muted:#a0a0a0;--border:#ffffff19;--field:#ffffff08;--hover:#ffffff12;--action:#f0f0f0;--action-text:#181818;--edge:#000; } }
@@ -36,20 +28,27 @@
     button,input,select { font:inherit;color:inherit; }
     button { border:0;cursor:pointer;background:transparent;border-radius:7px;padding:7px 10px; }
     button:hover { background:var(--hover); }
-    button:active { background:var(--border); }
+    button:active { background:var(--border);transform:scale(.97); }
     button:focus-visible,input:focus-visible,select:focus-visible { outline:2px solid currentColor;outline-offset:2px; }
     button:disabled { opacity:.4;cursor:default; }
     button[aria-pressed=true] { background:var(--hover); }
-    .icon { display:grid;place-items:center;width:23px;height:23px;padding:0; }
+    .icon { display:grid;place-items:center;width:24px;height:24px;flex:none;padding:0; }
     .grip { cursor:grab;color:var(--muted); }
-    svg { width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;pointer-events:none; }
+    svg { display:block;flex:none;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;pointer-events:none; }
     .controls { display:flex;flex-wrap:wrap;align-items:center;gap:4px;min-height:34px;padding:3px 6px 5px;background:rgb(0 0 0 / .12);border-bottom:1px solid var(--border); }
     .primary { display:flex;align-items:center;justify-content:center;gap:7px;background:var(--action);color:var(--action-text);padding:5px 8px;font-size:12px;font-weight:500; }
     .primary:hover { background:var(--action);opacity:.88; }
     .primary:active { opacity:.72; }
-    .play-icon { font-size:10px; }
+    .play-icon { display:grid;place-items:center; }
+    .play-icon svg { width:14px;height:14px; }
+    .style-toggle,.words-toggle,.word-back,.add-term { display:flex;align-items:center;justify-content:center;gap:5px; }
+    .style-toggle { width:28px;height:27px;padding:0; }
+    .words-toggle { padding:5px 6px;font-size:12px; }
+    .languages > svg { width:12px;height:12px; }
+    .target-wrap { position:relative; }
+    .target-wrap > svg { position:absolute;right:2px;top:50%;transform:translateY(-50%);width:12px;height:12px; }
     .languages { display:flex;align-items:center;gap:3px;margin-left:4px;white-space:nowrap;font-size:11px;color:var(--muted); }
-    .languages select { width:auto;max-width:100px;padding:3px 4px;border:0;background:transparent;color:var(--text); }
+    .languages select { appearance:none;width:auto;max-width:135px;padding:3px 17px 3px 4px;border:0;background:transparent;color:var(--text); }
     .pane { width:340px;max-width:calc(100vw - 24px);max-height:min(300px,calc(100vh - 160px));overflow:auto;padding:15px 18px;background:rgb(var(--surface) / .12);border-bottom:1px solid var(--border);overscroll-behavior:contain; }
     .style-grid { display:grid;grid-template-columns:1fr 1fr;gap:13px 18px; }
     label { display:grid;gap:6px; }
@@ -86,11 +85,11 @@
     .term-row{display:grid;grid-template-columns:1fr 1fr 27px;gap:5px;margin:0 0 9px}.term-row input{min-width:0}.term-row .aliases,.term-row .variants,.term-row .note{grid-column:1/3;font-size:11px}.term-row .remove{grid-column:3;grid-row:1/5;padding:0;color:var(--muted)}
     .notice{color:var(--muted);font-size:12px;margin:9px 0 0}.connection{color:inherit;text-decoration:underline;text-underline-offset:3px}
     @media(prefers-reduced-motion:reduce){.lyric-row,.window,.chrome,.header,.controls,.footer,.resize{transition:none}.lyric-row{filter:none}}
-  </style><section class="window" role="region" aria-label="LiveSub 悬浮窗" tabindex="0" hidden><div class="chrome">
-    <div class="header"><button class="icon grip" type="button" aria-label="拖动窗口，方向键微调" title="拖动窗口">${icon("grip")}</button><span class="brand">LiveSub</span><button class="icon lock" title="锁定窗口" aria-label="锁定窗口" aria-pressed="false">${icon("lock")}</button><button class="icon reset" title="恢复默认位置和大小" aria-label="恢复默认位置和大小">${icon("reset")}</button><button class="icon options" title="连接设置" aria-label="连接设置">${icon("gear")}</button><button class="icon close" title="关闭悬浮窗并停止翻译" aria-label="关闭悬浮窗并停止翻译">${icon("close")}</button></div>
-    <div class="controls"><button class="primary toggle-translation"><span class="play-icon">▶</span><span class="play-label">开始翻译</span></button><button class="style-toggle" aria-pressed="false" title="字幕样式">Aa</button><button class="words-toggle" aria-pressed="false">词库</button><div class="languages"><span>日语</span><span>→</span><select class="target" aria-label="目标语言"><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="en">English</option></select></div></div>
+  </style><section class="window" role="region" aria-label="YumeHime 悬浮窗" tabindex="0" hidden><div class="chrome">
+    <div class="header"><button class="icon grip" type="button" aria-label="拖动窗口，方向键微调" title="拖动窗口">${icon("grip")}</button><span class="brand">YumeHime</span><button class="icon lock" title="锁定窗口" aria-label="锁定窗口" aria-pressed="false">${icon("lock")}</button><button class="icon reset" title="恢复默认位置和大小" aria-label="恢复默认位置和大小">${icon("reset")}</button><button class="icon options" title="连接设置" aria-label="连接设置">${icon("gear")}</button><button class="icon close" title="关闭悬浮窗并停止翻译" aria-label="关闭悬浮窗并停止翻译">${icon("close")}</button></div>
+    <div class="controls"><button class="primary toggle-translation"><span class="play-icon">${icon("play")}</span><span class="play-label">开始翻译</span></button><button class="style-toggle" aria-pressed="false" title="字幕样式" aria-label="字幕样式">${icon("type")}</button><button class="words-toggle" aria-pressed="false">${icon("book")}<span>词库</span></button><div class="languages"><span>日语</span>${icon("arrow")}<div class="target-wrap"><select class="target" aria-label="目标语言"><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="en">English</option></select>${icon("chevron")}</div></div></div>
     <div class="pane style-pane" hidden><div class="style-grid"><label><span class="field-title">字号<output class="font-value">32</output></span><input class="font-size" type="range" min="16" max="64" step="1" aria-label="字幕字号"></label><label><span class="field-title">背景<output class="opacity-value">60%</output></span><input class="opacity" type="range" min="0" max="1" step="0.05" aria-label="背景不透明度"></label><label>描边<select class="outline" aria-label="描边强度"><option value="0">无</option><option value="1">轻</option><option value="2">标准</option><option value="3">明显</option><option value="4">强</option></select></label><label>字幕更新<select class="speed" aria-label="字幕更新速度"><option value="0">实时</option><option value="1000">稳定 · 1 秒</option><option value="2000">稳定 · 2 秒</option><option value="finalOnly">只显示确认结果</option></select></label><label>界面语言<select class="ui-language" aria-label="界面语言"><option value="auto">跟随系统</option><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="en">English</option></select></label><label class="check"><input class="show-ja" type="checkbox">显示日文原文</label></div></div>
-    <div class="pane words-pane" hidden><div class="word-selection"><div class="profile-list"></div><form class="create-profile"><select class="profile-kind" aria-label="词库类型"><option value="streamer">主播</option><option value="game">游戏</option><option value="custom">通用</option></select><input class="profile-name" required maxlength="60" placeholder="新词库名称" aria-label="新词库名称"><button type="submit">新建</button></form></div><form class="word-editor" hidden><div class="editor-head"><button class="word-back" type="button">‹ 返回</button><span class="editor-title"></span></div><div class="term-list"></div><div class="editor-actions"><button class="add-term" type="button">＋ 添加词条</button><button class="save-terms" type="submit">保存到服务器</button></div></form><div class="notice word-notice" role="status"></div></div>
+    <div class="pane words-pane" hidden><div class="word-selection"><div class="profile-list"></div><form class="create-profile"><select class="profile-kind" aria-label="词库类型"><option value="streamer">主播</option><option value="game">游戏</option><option value="custom">通用</option></select><input class="profile-name" required maxlength="60" placeholder="新词库名称" aria-label="新词库名称"><button type="submit">新建</button></form></div><form class="word-editor" hidden><div class="editor-head"><button class="word-back" type="button">${icon("back")}<span>返回</span></button><span class="editor-title"></span></div><div class="term-list"></div><div class="editor-actions"><button class="add-term" type="button">${icon("plus")}<span>添加词条</span></button><button class="save-terms" type="submit">保存到服务器</button></div></form><div class="notice word-notice" role="status"></div></div>
     <div class="footer"><span class="dot"></span><span class="status" role="status">尚未开始</span></div>
     </div><div class="lyrics-viewport"><div class="empty">点击开始翻译</div><div class="lyrics-mask"><div class="lyrics"></div></div></div>
     ${["n","s","e","w","ne","nw","sw"].map(edge=>`<div class="resize ${edge}" data-resize="${edge}" aria-hidden="true"></div>`).join("")}<button class="resize se" data-resize="se" aria-label="调整窗口大小，方向键微调" title="拖动调整大小">${icon("resize")}</button>
@@ -99,7 +98,7 @@
   let config = {}, capture = { running: false }, visible = false, session = null, gesture = null, gestureFrame;
   let box = { left: 0, top: 0, width: 560, height: 220 }, raw = new Map(), rows = new Map(), pages = [], activeKey = null, renderTimer,lastRender=0;
   let idleTimer;
-  const localization=globalThis.LiveSubI18n.watch(shadow,()=>config.uiLanguage);
+  const localization=globalThis.YumeHimeI18n.watch(shadow,()=>config.uiLanguage);
   let profiles = [], editProfile = null, termDraft = [];
   const motion = matchMedia("(prefers-reduced-motion: reduce)");
   async function rpc(type, extra = {}) { const result = await chrome.runtime.sendMessage({ to: "background", type, ...extra }); if (result?.error) throw new Error(result.error); return result; }
@@ -185,7 +184,7 @@
   };
   function updateCapture(value) {
     capture = { translationEnabled: capture.translationEnabled, ...(value || { running: false }) }; $(".play-label").textContent = capture.running ? (capture.paused ? "继续翻译" : "暂停翻译") : "开始翻译";
-    $(".play-icon").textContent = capture.running && !capture.paused ? "Ⅱ" : "▶"; $(".footer").classList.toggle("live", !!capture.connected);
+    $(".play-icon").innerHTML = icon(capture.running && !capture.paused ? "pause" : "play"); $(".footer").classList.toggle("live", !!capture.connected);
     status(capture.message || (capture.running ? "正在连接" : "尚未开始")); $(".empty").textContent = capture.running ? (capture.paused ? "已暂停" : "等待字幕") : "点击开始翻译";
   }
   function applySettings(value) {
@@ -194,8 +193,8 @@
     $(".font-size").value = size; $(".font-value").textContent = size; $(".opacity").value = config.opacity ?? .6; $(".opacity-value").textContent = `${Math.round((config.opacity ?? .6)*100)}%`;
     $(".outline").value = outline; $(".show-ja").checked = config.showJapanese !== false; $(".target").value = config.targetLanguage || "zh-CN";
     $(".speed").value=config.subtitleSpeed??"1000";
-    $(".ui-language").value=config.uiLanguage||"auto";host.lang=globalThis.LiveSubI18n.resolveLanguage(config.uiLanguage);localization.refresh();
-    win.classList.toggle("locked", !!config.positionLocked); $(".lock").setAttribute("aria-pressed", String(!!config.positionLocked)); $(".grip").disabled = !!config.positionLocked;
+    $(".ui-language").value=config.uiLanguage||"auto";host.lang=globalThis.YumeHimeI18n.resolveLanguage(config.uiLanguage);localization.refresh();
+    win.classList.toggle("locked", !!config.positionLocked); $(".lock").setAttribute("aria-pressed", String(!!config.positionLocked)); $(".grip").disabled = !!config.positionLocked; $(".lock").innerHTML = icon(config.positionLocked ? "lock" : "unlock"); $(".lock").title = config.positionLocked ? "解锁窗口" : "锁定窗口"; $(".lock").setAttribute("aria-label", $(".lock").title);
     place(); renderLyrics(true);
   }
   function center(instant) {
@@ -257,7 +256,7 @@
     for(const profile of profiles){const row=document.createElement("div");row.className="profile-row";const label=document.createElement("label");label.className="check";const checkbox=document.createElement("input");checkbox.type="checkbox";checkbox.checked=profile.id==="global"||selected.has(profile.id);checkbox.disabled=profile.id==="global";checkbox.setAttribute("aria-label",profileName(profile.id));label.append(checkbox,document.createTextNode(profileName(profile.id)));const count=document.createElement("small");count.textContent=`${profile.count} 条`;const edit=document.createElement("button");edit.textContent="编辑";edit.onclick=()=>openEditor(profile.id);checkbox.onchange=async()=>{if(checkbox.checked)selected.add(profile.id);else selected.delete(profile.id);if(selected.size>10){checkbox.checked=false;selected.delete(profile.id);wordNotice("最多同时选择 10 个词库。");return;}await save({profiles:[...selected].join(",")});wordNotice("词库已应用。");};row.append(label,count,edit);list.append(row);}
   }
   async function openEditor(id) { wordNotice("正在读取…");try{termDraft=(await rpc("glossaryGet",{profile:id})).entries;editProfile=id;$(".editor-title").textContent=profileName(id);$(".word-selection").hidden=true;$(".word-editor").hidden=false;renderTerms();wordNotice("");}catch(error){wordNotice(error.message);} }
-  function renderTerms(){const list=$(".term-list");list.replaceChildren();for(const [index,term]of termDraft.entries()){const row=document.createElement("div");row.className="term-row";for(const [key,placeholder]of[["source","日语词语"],["target","中文译名"],["variants","翻译识别写法，用 | 分隔"],["note","按语境翻译的提示，可选"],["aliases","替换原文的别名，可选，用 | 分隔"]]){const input=document.createElement("input");input.placeholder=placeholder;input.setAttribute("aria-label",placeholder);input.maxLength=["aliases","variants","note"].includes(key)?500:100;input.required=["source","target"].includes(key);input.value=["aliases","variants"].includes(key)?(term[key]||[]).join("|"):(term[key]||"");if(["aliases","variants","note"].includes(key))input.className=key;input.oninput=()=>{term[key]=["aliases","variants"].includes(key)?input.value.split("|").map(s=>s.trim()).filter(Boolean):input.value;};row.append(input);}const remove=document.createElement("button");remove.type="button";remove.className="remove";remove.textContent="×";remove.setAttribute("aria-label","移除词条");remove.onclick=()=>{termDraft.splice(index,1);renderTerms();};row.append(remove);list.append(row);}}
+  function renderTerms(){const list=$(".term-list");list.replaceChildren();for(const [index,term]of termDraft.entries()){const row=document.createElement("div");row.className="term-row";for(const [key,placeholder]of[["source","日语词语"],["target","中文译名"],["variants","翻译识别写法，用 | 分隔"],["note","按语境翻译的提示，可选"],["aliases","替换原文的别名，可选，用 | 分隔"]]){const input=document.createElement("input");input.placeholder=placeholder;input.setAttribute("aria-label",placeholder);input.maxLength=["aliases","variants","note"].includes(key)?500:100;input.required=["source","target"].includes(key);input.value=["aliases","variants"].includes(key)?(term[key]||[]).join("|"):(term[key]||"");if(["aliases","variants","note"].includes(key))input.className=key;input.oninput=()=>{term[key]=["aliases","variants"].includes(key)?input.value.split("|").map(s=>s.trim()).filter(Boolean):input.value;};row.append(input);}const remove=document.createElement("button");remove.type="button";remove.className="remove";remove.innerHTML=icon("trash");remove.setAttribute("aria-label","移除词条");remove.onclick=()=>{termDraft.splice(index,1);renderTerms();};row.append(remove);list.append(row);}}
   $(".word-back").onclick=()=>{$(".word-editor").hidden=true;$(".word-selection").hidden=false;loadProfiles();};
   $(".add-term").onclick=()=>{termDraft.push({source:"",target:"",aliases:[]});renderTerms();$(".term-list .term-row:last-child input").focus();};
   $(".word-editor").onsubmit=async event=>{event.preventDefault();const button=$(".save-terms");button.disabled=true;try{await rpc("glossarySave",{profile:editProfile,entries:termDraft.map(term=>({...term,source:term.source.trim(),target:term.target.trim()}))});wordNotice("已保存到服务器，正在使用的词库已更新。");}catch(error){wordNotice(error.message);}finally{button.disabled=false;}};

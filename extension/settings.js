@@ -4,7 +4,7 @@ export const defaults = {
   url: "ws://127.0.0.1:8765/ws", token: "", model: "gemini-3.5-flash-lite",
   profiles: topicProfiles.join(","), fontSize: 32, bottom: 12, opacity: 0.6, showJapanese: true,
   outlineWidth: 2, subtitleSpeed: "1000", uiLanguage: "auto",
-  subtitlePosition: null, positionLocked: false, windowSize: { width: 560, height: 220 }, targetLanguage: globalThis.LiveSubI18n.detectLanguage()
+  subtitlePosition: null, positionLocked: false, windowSize: { width: 560, height: 220 }, targetLanguage: globalThis.YumeHimeI18n.detectLanguage()
 };
 export async function settings() {
   const saved = (await chrome.storage.local.get("settings")).settings || {};

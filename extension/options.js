@@ -8,7 +8,7 @@ function populate() { for (const [key, value] of Object.entries(config)) {
   else input.value = value;
 } }
 populate();
-const localization=globalThis.LiveSubI18n.watch(document,()=>form.elements.uiLanguage.value);
+const localization=globalThis.YumeHimeI18n.watch(document,()=>form.elements.uiLanguage.value);
 form.elements.uiLanguage.addEventListener("change",()=>localization.refresh());
 const editedPosition = new Set();
 for (const name of ["bottom", "positionLocked"]) form.elements[name].addEventListener("input", () => editedPosition.add(name));
@@ -22,6 +22,8 @@ chrome.storage.onChanged.addListener((changes, area) => {
 const preview = document.querySelector(".subtitle-preview");
 function updatePreview() {
   const values = form.elements;
+  document.querySelector("#font-size-value").textContent = `${values.fontSize.value}px`;
+  document.querySelector("#opacity-value").textContent = `${Math.round(Number(values.opacity.value) * 100)}%`;
   preview.style.setProperty("--size", `${values.fontSize.value}px`);
   preview.style.setProperty("--opacity", values.opacity.value);
   const outline = Number(values.outlineWidth.value);
@@ -86,7 +88,7 @@ document.querySelector("#glossary").onsubmit = async event => {
 };
 document.querySelector("#export").onclick = () => {
   const url = URL.createObjectURL(new Blob([entries.value], { type: "application/json" }));
-  const link = document.createElement("a"); link.href = url; link.download = "livesub-glossary.json"; link.click();
+  const link = document.createElement("a"); link.href = url; link.download = "yumehime-glossary.json"; link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 };
 function csv(text) {

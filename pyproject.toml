@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "livesub"
+name = "yumehime"
 version = "0.1.0"
 description = "Self-hosted Japanese live subtitles"
 requires-python = ">=3.11"

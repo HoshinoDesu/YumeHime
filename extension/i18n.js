@@ -1,10 +1,14 @@
 (() => {
-  if (globalThis.LiveSubI18n) return;
+  if (globalThis.YumeHimeI18n) return;
   const entries = [
-    ["LiveSub 设置","LiveSub Settings","LiveSub 設定"],
+    ["设置导航","Settings navigation","設定導覽"],
+    ["解锁窗口","Unlock window","解鎖視窗"],
+    ["返回","Back","返回"],
+    ["添加词条","Add entry","新增詞條"],
+    ["YumeHime 设置","YumeHime Settings","YumeHime 設定"],
     ["悬浮窗","Subtitle window","懸浮窗"],
     ["显示悬浮窗","Show subtitle window","顯示懸浮窗"],
-    ["LiveSub 悬浮窗","LiveSub subtitle window","LiveSub 懸浮窗"],
+    ["YumeHime 悬浮窗","YumeHime subtitle window","YumeHime 懸浮窗"],
     ["连接设置","Connection settings","連線設定"],
     ["界面语言","Interface language","介面語言"],
     ["跟随系统","System language","跟隨系統"],
@@ -169,5 +173,5 @@
     observer.observe(root,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:["title","aria-label","placeholder"]});
     refresh();return {refresh};
   }
-  globalThis.LiveSubI18n={detectLanguage,resolveLanguage,t,watch};
+  globalThis.YumeHimeI18n={detectLanguage,resolveLanguage,t,watch};
 })();

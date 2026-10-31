@@ -1,6 +1,6 @@
 import {settings} from "./settings.js";
 let config=await settings();
-const localization=globalThis.LiveSubI18n.watch(document,()=>config.uiLanguage);
+const localization=globalThis.YumeHimeI18n.watch(document,()=>config.uiLanguage);
 const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 const toggle = document.querySelector("#window-toggle"), status = document.querySelector("#status");
 async function update() {
