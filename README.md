@@ -51,6 +51,68 @@ docker compose up -d --build
 
 ```
 
+### 语音识别模型配置
+
+默认语音识别模型为 **ReazonSpeech k2-v2**，使用 INT8 Encoder、FP32 Decoder 和 INT8 Joiner，由服务端 CPU 运行。首次启动前先下载模型和 Silero VAD：
+
+```bash
+.venv/bin/livesub prepare --engines reazon --models models
+```
+
+在服务端 `.env` 中设置：
+
+```dotenv
+LIVESUB_ENGINE=reazon
+LIVESUB_THREADS=3
+LIVESUB_MODELS=models
+```
+
+| 配置项 | 作用 | 默认值 |
+| --- | --- | --- |
+| `LIVESUB_ENGINE` | 选择语音识别引擎 | `reazon` |
+| `LIVESUB_THREADS` | 模型推理线程数；4 核 ARM 可先使用 3 | `3` |
+| `LIVESUB_MODELS` | 模型所在目录，相对路径以启动服务时的工作目录为准 | `models` |
+
+下载后的默认目录为：
+
+```text
+models/
+├── silero_vad.onnx
+└── reazon/
+    ├── encoder-epoch-99-avg-1.int8.onnx
+    ├── decoder-epoch-99-avg-1.onnx
+    ├── joiner-epoch-99-avg-1.int8.onnx
+    └── tokens.txt
+```
+
+模型在启动时加载。下载目录应与服务端配置的模型目录一致；更换识别引擎前需要先下载对应模型。
+
+可选择的引擎如下：
+
+| `LIVESUB_ENGINE` | 模型 | 说明 |
+| --- | --- | --- |
+| `reazon` | ReazonSpeech k2-v2 INT8 | 默认日语识别模型 |
+| `parakeet` | Parakeet Japanese 0.6B INT8 | 当前使用 ONNX CTC 导出 |
+| `nemotron` | Nemotron 3.5 ASR Streaming 0.6B INT8 | 当前服务每段音频新建识别流 |
+| `sensevoice` | SenseVoice INT8 | 固定使用日语识别 |
+| `whisper` | whisper.cpp 多语种 base | 还需安装 `whisper-cli` 并加入 `PATH`；现有 Docker 镜像未包含此程序 |
+
+例如切换到 Parakeet：
+
+```bash
+.venv/bin/livesub prepare --engines parakeet --models models
+```
+
+然后把 `.env` 中的 `LIVESUB_ENGINE` 改为 `parakeet`，重新启动 Python 服务。使用 Docker Compose 时，执行以下命令使新环境变量生效：
+
+```bash
+docker compose up -d --force-recreate livesub
+```
+
+Compose 将宿主机的 `./models` 挂载为容器的 `/app/models`，并在容器内固定使用该路径；下载时仍把文件放在项目的 `models/` 目录。容器启动时不会自动下载缺失的模型。
+
+`LIVESUB_ENGINE` 控制音频转文字；`LIVESUB_MODEL` 控制文字翻译。语音识别模型名称无需填入浏览器的“翻译模型”设置。
+
 ### 2. 建立网络连接
 
 服务端默认仅监听本地回环地址（`127.0.0.1:8765`），推荐以下两种连接方式：
