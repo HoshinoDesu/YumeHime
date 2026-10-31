@@ -187,7 +187,6 @@ For more preset entries and usage details, see the [glossary guide](https://www.
 - `src/livesub/`: Python server for ASR, WebSocket connections, translation, and glossaries.
 - `scripts/`: Server configuration, Whisper build, and connectivity check scripts.
 - `docs/`: Design notes, glossary documentation, and development records.
-- `models/`, `audio/`, `results/`: Local models and test output, ignored by Git.
 
 ## License
 
