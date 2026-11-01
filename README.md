@@ -150,22 +150,59 @@ If your server has a domain, set `LIVESUB_DOMAIN` in `.env` and enable the Compo
 
 ## Glossary Management
 
-Glossaries are stored in SQLite on the server. They include a global glossary (`global`, always enabled) and custom groups such as `streamer:arale` or `game:bandori`. Create, select, and edit entries in the floating window, or import and export CSV or JSON from the extension settings.
+Entries are stored in SQLite on the server. The browser stores only the selected group names. The global glossary (`global`) is always enabled. Select, create, and edit streamer, game, and other groups under **Glossary** in the floating window.
+
+**Built-in glossaries:**
+
+| Group | Contents | Entries |
+| --- | --- | ---: |
+| `topic:VTuber` | Favorites, group fandom, singing streams, collaborations, clips, Super Chats | 64 |
+| `topic:动漫与二次元` | Anime, voice actors, characters, fan works, merchandise | 61 |
+| `topic:日常生活` | Sleep, cooking, shopping, weather, physical sensations | 78 |
+| `topic:口语与网络用语` | Responses, exclamations, internet slang, context-dependent expressions | 85 |
+| `topic:游戏` | Gacha, pity systems, abilities, rhythm games, multiplayer | 76 |
+
+All 364 preset entries are available in the [built-in glossary file](src/livesub/presets/glossary-presets.json). These groups are created automatically on first server startup; later restarts preserve your edits. The file is organized by group. When importing JSON in settings, use the entry array for a single group. Group IDs above match their stored names.
+
+**Usage:**
+
+1. Open **Glossary** in the floating window and select the groups you need. Click **Edit** to change entries, then **Save to server** to apply them to the current session.
+2. For bulk editing, open extension settings, enter a group name under **Edit glossary** (such as `global`, `streamer:arale`, or `game:bandori`), and click **Load**.
+3. Edit the JSON or import a CSV / JSON file, then click **Save glossary**. Importing fills the editor; saving writes the entire editor contents to that group. **Export JSON** saves the current editor contents to a file.
 
 **JSON example:**
 
 ```json
-[{"source": "切り抜き", "target": "切片", "aliases": []}]
+[
+  {
+    "source": "大丈夫",
+    "target": "没事",
+    "aliases": [],
+    "variants": ["だいじょうぶ"],
+    "note": "Can reassure someone that things are fine, or politely decline an offer; choose from context."
+  }
+]
 ```
 
-**CSV format:** Include the columns `source,target,aliases`. Separate multiple aliases with `|`.
+**CSV format:** Include `source,target,aliases`. The optional `variants` and `note` columns are also supported. Separate multiple aliases or variants with `|`.
+
+```csv
+source,target,aliases,variants,note
+切り抜き,切片,,きりぬき,An edited clip from a stream
+大丈夫,没事,,だいじょうぶ,May reassure someone or decline an offer; choose from context
+```
 
 **Fields:**
 
-- `aliases`: Common recognition errors, including homophones. These are directly replaced with the correct `source` before translation.
-- `variants` / `note`: Alternative forms and guidance that help the translation model understand the context.
+| Field | Purpose |
+| --- | --- |
+| `source` | Japanese term. Required. |
+| `target` | Common or preferred translation. Required. Ambiguous expressions still depend on context. |
+| `aliases` | Recognition errors that should be replaced directly with `source`. A JSON array. |
+| `variants` | Readings, alternative forms, or recognition variants provided only as translation context. They do not change the Japanese transcript. A JSON array. |
+| `note` | Context and wording guidance; not displayed verbatim as subtitles. |
 
-For more preset entries and usage details, see the [glossary guide](https://www.google.com/search?q=docs/glossary.md) and the `examples/` directory.
+If the same `source` appears in multiple groups, built-in topic groups load first, followed by `global`, then the selected streamer, game, or other custom groups. Later entries take priority.
 
 ---
 
