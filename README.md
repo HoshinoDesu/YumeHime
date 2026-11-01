@@ -39,12 +39,9 @@ cp .env.example .env
 
 Edit `.env` and enter your translation API base URL (`LIVESUB_API_BASE`, supporting the OpenAI `/chat/completions` format), API key, and model name. The default recommended translation model is `gemini-3.5-flash-lite`.
 
-Next, generate the client configuration and start the server:
+Set `LIVESUB_ACCESS_TOKEN` in `.env`; use the same token in the browser extension. Then start the server:
 
 ```bash
-# Generate client.local.json for the browser; copy it to your computer and keep it out of Git
-.venv/bin/python scripts/configure-server.py
-
 # Start the server
 .venv/bin/uvicorn livesub.server:app --host 127.0.0.1 --port 8765 --ws-max-size 65536 --no-access-log
 ```
@@ -143,7 +140,7 @@ If your server has a domain, set `LIVESUB_DOMAIN` in `.env` and enable the Compo
 
 1. Open `chrome://extensions` in Chrome and enable **Developer mode**.
 2. Click **Load unpacked** and select the project's `extension` directory.
-3. Open the extension settings, import the `client.local.json` generated in step 1, and save.
+3. Open the extension settings and enter the server address, gateway access token (`LIVESUB_ACCESS_TOKEN`), and translation model. For an SSH tunnel, use `ws://127.0.0.1:8765/ws`; for a domain, use `wss://your-domain/ws`. Save the settings and allow the connection when prompted.
 4. Open a Japanese livestream, click the extension icon to show the **subtitle window**, then click **Start translation**.
 
 ---
@@ -206,24 +203,11 @@ If the same `source` appears in multiple groups, built-in topic groups load firs
 
 ---
 
-**Server connectivity checks:**
-
-```bash
-# Check the translation API
-.venv/bin/python scripts/probe-translation.py
-
-# Send 30 seconds of audio at playback speed to check recognition and translation
-.venv/bin/python scripts/replay-session.py audio/live.wav --seconds 30
-```
-
----
-
 ## Project Structure
 
 - `extension/`: Chrome MV3 extension for audio capture, UI, and glossary management.
 - `src/livesub/`: Python server for ASR, WebSocket connections, translation, and glossaries.
-- `scripts/`: Server configuration, Whisper build, and connectivity check scripts.
 
 ## License
 
-The project code is released under [GPL-3.0](https://www.google.com/search?q=LICENSE). Downloaded speech recognition models follow their respective licenses.
+The project code is released under [GPL-3.0](LICENSE). Downloaded speech recognition models follow their respective licenses.

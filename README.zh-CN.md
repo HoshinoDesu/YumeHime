@@ -40,12 +40,9 @@ cp .env.example .env
 
 编辑 `.env` 文件，填入你的翻译接口地址（`LIVESUB_API_BASE`，支持 OpenAI `/chat/completions` 格式）、API Key 和模型名称（默认推荐 `gemini-3.5-flash-lite`）。
 
-接着生成客户端配置并启动服务：
+同时在 `.env` 中设置 `LIVESUB_ACCESS_TOKEN`，浏览器连接时填写相同的令牌。然后启动服务：
 
 ```bash
-# 生成浏览器连接配置 client.local.json（请下载到本地，勿提交至 Git）
-.venv/bin/python scripts/configure-server.py
-
 # 启动服务
 .venv/bin/uvicorn livesub.server:app --host 127.0.0.1 --port 8765 --ws-max-size 65536 --no-access-log
 
@@ -144,7 +141,7 @@ ssh -J root@中继服务器IP -N -L 8765:127.0.0.1:8765 root@目标服务器IP
 
 1. 打开 Chrome 访问 `chrome://extensions`，开启右上角**开发者模式**。
 2. 点击**加载已解压的扩展程序**，选择项目中的 `extension` 目录。
-3. 打开扩展设置页，导入第一步生成的 `client.local.json` 并保存。
+3. 打开扩展设置页，填写服务器地址、网关访问令牌（`LIVESUB_ACCESS_TOKEN`）和翻译模型。SSH 隧道使用 `ws://127.0.0.1:8765/ws`，域名连接使用 `wss://你的域名/ws`。保存设置，并在提示时允许连接。
 4. 打开任意日语直播页面，点击扩展图标呼出**悬浮窗**，点击**开始翻译**即可。
 
 ---
@@ -207,25 +204,11 @@ source,target,aliases,variants,note
 
 ---
 
-**服务端连通性自检：**
-
-```bash
-# 检查翻译接口是否正常
-.venv/bin/python scripts/probe-translation.py
-
-# 按真实播放速度发送 30 秒音频，端到端测试识别与翻译输出
-.venv/bin/python scripts/replay-session.py audio/live.wav --seconds 30
-
-```
-
----
-
 ## 目录结构
 
 * `extension/`：Chrome MV3 浏览器扩展（音频采集、UI 与词库管理）
 * `src/livesub/`：Python 服务端核心（ASR 识别、WebSocket 服务、翻译适配与词库）
-* `scripts/`：服务端配置生成、Whisper 编译与连通性测试脚本
 
 ## 许可证
 
-本项目代码基于 [GPL-3.0](https://www.google.com/search?q=LICENSE) 开源。服务端下载的各类语音识别模型遵循其各自的开源许可证。
+本项目代码基于 [GPL-3.0](LICENSE) 开源。服务端下载的各类语音识别模型遵循其各自的开源许可证。

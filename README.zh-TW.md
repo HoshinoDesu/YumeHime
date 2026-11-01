@@ -39,12 +39,9 @@ cp .env.example .env
 
 編輯 `.env` 檔案，填入你的翻譯 API 位址（`LIVESUB_API_BASE`，支援 OpenAI `/chat/completions` 格式）、API Key 和模型名稱（預設建議使用 `gemini-3.5-flash-lite`）。
 
-接著產生用戶端設定並啟動服務：
+同時在 `.env` 中設定 `LIVESUB_ACCESS_TOKEN`，瀏覽器連線時填入相同的權杖。接著啟動服務：
 
 ```bash
-# 產生瀏覽器連線設定 client.local.json（請下載至本機，勿提交至 Git）
-.venv/bin/python scripts/configure-server.py
-
 # 啟動服務
 .venv/bin/uvicorn livesub.server:app --host 127.0.0.1 --port 8765 --ws-max-size 65536 --no-access-log
 ```
@@ -143,7 +140,7 @@ ssh -J root@中繼伺服器IP -N -L 8765:127.0.0.1:8765 root@目標伺服器IP
 
 1. 在 Chrome 開啟 `chrome://extensions`，啟用右上角的**開發人員模式**。
 2. 點擊**載入未封裝項目**，選擇專案中的 `extension` 目錄。
-3. 開啟擴充功能設定頁，匯入第一步產生的 `client.local.json` 並儲存。
+3. 開啟擴充功能設定頁，填入伺服器位址、閘道存取權杖（`LIVESUB_ACCESS_TOKEN`）和翻譯模型。SSH 通道使用 `ws://127.0.0.1:8765/ws`，網域連線使用 `wss://你的網域/ws`。儲存設定，並在提示時允許連線。
 4. 開啟任意日語直播頁面，點擊擴充功能圖示以顯示**懸浮窗**，再點擊**開始翻譯**。
 
 ---
@@ -206,24 +203,11 @@ source,target,aliases,variants,note
 
 ---
 
-**伺服器連線檢查：**
-
-```bash
-# 檢查翻譯 API 是否正常
-.venv/bin/python scripts/probe-translation.py
-
-# 按實際播放速度傳送 30 秒音訊，檢查辨識與翻譯輸出
-.venv/bin/python scripts/replay-session.py audio/live.wav --seconds 30
-```
-
----
-
 ## 目錄結構
 
 - `extension/`：Chrome MV3 瀏覽器擴充功能（音訊擷取、介面與詞庫管理）。
 - `src/livesub/`：Python 伺服器核心（語音辨識、WebSocket 服務、翻譯轉接與詞庫）。
-- `scripts/`：伺服器設定產生、Whisper 編譯與連線檢查腳本。
 
 ## 授權條款
 
-本專案程式碼採用 [GPL-3.0](https://www.google.com/search?q=LICENSE) 授權。伺服器端下載的各類語音辨識模型依各自的開源授權條款使用。
+本專案程式碼採用 [GPL-3.0](LICENSE) 授權。伺服器端下載的各類語音辨識模型依各自的開源授權條款使用。
