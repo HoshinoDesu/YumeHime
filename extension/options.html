@@ -10,24 +10,23 @@
 <section class="card" id="connection-settings"><header class="card-header"><h2>连接设置</h2><label class="file-button secondary" for="connection"><span data-icon="upload"></span><span>导入连接配置</span><input id="connection" type="file" accept=".json"></label></header>
 <div class="fields"><label class="wide">服务器地址<input name="url" type="url" required placeholder="wss://subtitle.example.com/ws" spellcheck="false"></label>
 <label class="wide">网关访问令牌<input name="token" type="password" required autocomplete="off" spellcheck="false"></label>
-<label class="wide">翻译模型<input name="model" required spellcheck="false"></label>
+<div class="model-field wide"><label for="translation-model">翻译模型</label><div class="model-input"><input id="translation-model" name="model" required spellcheck="false"><button id="fetch-models" type="button" class="secondary"><span data-icon="reset"></span><span>获取模型列表</span></button></div><select id="model-list" aria-label="选择云端翻译模型" hidden></select><small class="field-help">使用服务端当前 API 提供的模型，选择后点击保存设置。</small><output id="model-status" aria-live="polite"></output></div>
 <label>界面语言<select name="uiLanguage"><option value="auto">跟随系统</option><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="en">English</option></select></label>
 <label>目标语言<select name="targetLanguage"><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="en">English</option></select></label>
-<label class="wide">本次使用的主播或游戏词库<input name="profiles" placeholder="streamer:arale,game:bandori" spellcheck="false"></label></div></section>
+</div></section>
 <section class="card" id="subtitle-settings"><header class="card-header"><h2>字幕样式</h2><button id="reset-position" type="button" class="secondary"><span data-icon="reset"></span><span>恢复默认位置</span></button></header>
 <div class="appearance-grid"><div class="appearance-fields">
 <label><span class="field-title"><span>中文字幕字号</span><output id="font-size-value" for="font-size">32</output></span><input id="font-size" name="fontSize" type="range" min="16" max="64"></label>
 <label><span class="field-title"><span>背景不透明度</span><output id="opacity-value" for="caption-opacity">60%</output></span><input id="caption-opacity" name="opacity" type="range" min="0" max="1" step="0.05"></label>
 <div class="fields"><label>描边强度<select name="outlineWidth"><option value="0">无</option><option value="1">轻</option><option value="2">标准</option><option value="3">明显</option><option value="4">强</option></select></label>
 <label>默认距底部（%）<input name="bottom" type="number" min="2" max="70"></label></div>
-<label>字幕更新<select name="subtitleSpeed"><option value="0">实时</option><option value="1000">稳定 · 1 秒</option><option value="2000">稳定 · 2 秒</option><option value="finalOnly">只显示确认结果</option></select></label>
+<label>日文临时字幕显示<select name="subtitleSpeed"><option value="0">立即显示（会随识别修正）</option><option value="1000">每 1 秒刷新临时字幕</option><option value="2000">每 2 秒刷新临时字幕</option><option value="finalOnly">说完后显示完整双语字幕</option></select><small class="field-help">前三项只调整日文临时字幕的刷新频率，译文一返回就显示；最后一项会等待原文和译文确认。</small></label>
 <label class="check"><input name="showJapanese" type="checkbox">显示日文原文</label><label class="check"><input name="positionLocked" type="checkbox">锁定浮层位置</label>
 </div><div class="subtitle-preview" aria-label="字幕外观预览"><div class="preview-caption"><div class="ja">今日はちょっと寒いね。</div><div class="zh">今天有点冷呢。</div></div></div></div></section>
 <div class="save-bar"><output id="status" aria-live="polite"></output><button type="submit"><span data-icon="save"></span><span>保存设置</span></button></div>
 </form>
 <section class="card" id="glossary-settings"><header class="card-header"><h2>词库</h2><label class="file-button secondary" for="import"><span data-icon="upload"></span><span>导入 CSV 或 JSON</span><input id="import" type="file" accept=".csv,.json" form="glossary"></label></header>
-<form id="glossary"><div class="profile-toolbar"><label>编辑词库<input id="profile" value="global" required spellcheck="false"></label><button id="load" type="button" class="secondary">读取</button></div>
-<label>词条（JSON）<textarea id="entries" spellcheck="false">[]</textarea></label>
+<form id="glossary"><div class="profile-toolbar"><label>选择服务器词库<select id="profile" required><option value="global">全局词库（始终启用）</option></select></label><button id="load" type="button" class="secondary">刷新词库列表</button></div><p class="field-help">这里编辑服务器保存的词条；本次翻译启用哪些词库，请在悬浮窗中勾选。</p><div class="create-glossary"><select id="profile-kind" aria-label="词库类型"><option value="streamer">主播</option><option value="game">游戏</option><option value="custom">通用</option></select><input id="profile-name" maxlength="60" placeholder="新词库名称" aria-label="新词库名称"><button id="create-profile" type="button" class="secondary">新建词库</button></div><div id="term-editor"></div>
 <div class="actions"><button type="submit"><span data-icon="save"></span><span>保存词库</span></button><button id="export" type="button" class="secondary"><span data-icon="download"></span><span>导出 JSON</span></button></div>
 </form><output id="glossary-status" aria-live="polite"></output></section>
-</main></div><script src="icons.js"></script><script src="options.js" type="module"></script></body></html>
+</main></div><script src="icons.js"></script><script src="term-editor.js"></script><script src="options.js" type="module"></script></body></html>

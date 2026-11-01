@@ -1,5 +1,5 @@
 import asyncio
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 import os
 
 from fastapi import WebSocketDisconnect
@@ -19,6 +19,7 @@ class Segment:
     translated_source: str = ""
     translated_text: str = ""
     final_sent: bool = False
+    waiting: bool = False
 
 
 class LiveTranslator:
@@ -45,7 +46,11 @@ class LiveTranslator:
             self.states[segment_id] = state
         else:
             state.latest = event.copy()
-        await self.launch(state)
+        if state.task and event["final"] and (state.waiting or
+                (state.requested and state.requested[0] != event["text"])):
+            state.task.cancel()
+        else:
+            await self.launch(state)
         if event["final"] and event["text"]:
             self.context.append(event["text"])
             del self.context[:-3]
@@ -62,8 +67,15 @@ class LiveTranslator:
         await self.send({**event, "kind": "translation", "revision": state.revision,
                          "source_revision": event["revision"], "final": final, "text": text})
 
+    @staticmethod
+    def source_event(state):
+        event = state.latest.copy()
+        if not event["final"]:
+            event["text"] = event["stable_text"]
+        return event
+
     async def launch(self, state):
-        event = state.latest
+        event = self.source_event(state)
         if self.closing or not self.key or state.task or state.final_sent or not event["text"]:
             return
         if not event["final"] and not event.get("stable"):
@@ -86,18 +98,20 @@ class LiveTranslator:
 
     @staticmethod
     def compatible(source, current):
-        return source == current or len(os.path.commonprefix([source, current])) >= 4
+        return bool(source) and current.startswith(source)
 
     async def run(self, state):
         event = None
         try:
+            state.waiting = True
             if not state.latest["final"]:
-                delay = 2 - (asyncio.get_running_loop().time() - state.last_started)
+                delay = .8 - (asyncio.get_running_loop().time() - state.last_started)
                 if delay > 0:
                     await asyncio.sleep(delay)
             async with asyncio.timeout(6):
                 async with self.slots:
-                    event = state.latest.copy()
+                    state.waiting = False
+                    event = self.source_event(state)
                     if not event["final"] and not event.get("stable"):
                         return
                     state.requested = (event["text"], event["final"])
@@ -120,6 +134,9 @@ class LiveTranslator:
                 if state.latest["text"] == event["text"] and state.latest["final"]:
                     await self.emit(state, state.latest, latest, True)
                     state.final_sent = True
+        except asyncio.CancelledError:
+            if self.closing:
+                raise
         except (TranslationError, httpx.HTTPError, TimeoutError, ValueError) as error:
             if event and state.latest["final"] and event["text"] == state.latest["text"]:
                 message = str(error) if isinstance(error, TranslationError) else "本句翻译超时或连接失败"
@@ -127,6 +144,7 @@ class LiveTranslator:
         except (WebSocketDisconnect, RuntimeError):
             self.closing = True
         finally:
+            state.waiting = False
             state.task = None
             self.tasks.discard(asyncio.current_task())
             await self.launch(state)

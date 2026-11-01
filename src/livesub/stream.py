@@ -19,16 +19,20 @@ class StreamRecognizer:
 
     def new_segment(self, start: int):
         self.active = {"segment_id": uuid.uuid4().hex, "revision": 0,
-                       "start": start, "last_partial": self.cursor, "last_text": "", "stable": False}
+                       "start": start, "last_partial": self.cursor, "last_text": "", "stable_text": ""}
 
-    def event(self, text: str, final: bool, start: int, end: int, stable: bool = False):
+    def correct(self, text: str):
         for term in self.terms:
             for alias in term.get("aliases", []):
                 if alias:
                     text = text.replace(alias, term["source"])
+        return text
+
+    def event(self, text: str, final: bool, start: int, end: int, stable_text: str = ""):
         self.active["revision"] += 1
         return {"type": "subtitle", "kind": "original", "segment_id": self.active["segment_id"],
-                "revision": self.active["revision"], "final": final, "text": text, "stable": final or stable,
+                "revision": self.active["revision"], "final": final, "text": text,
+                "stable": final or bool(stable_text), "stable_text": text if final else stable_text,
                 "start_ms": round(start / SAMPLE_RATE * 1000), "end_ms": round(end / SAMPLE_RATE * 1000)}
 
     def final_events(self, segments):
@@ -36,7 +40,7 @@ class StreamRecognizer:
         for start, audio in segments:
             if self.active is None:
                 self.new_segment(start)
-            text = self.recognizer.transcribe(audio)
+            text = self.correct(self.recognizer.transcribe(audio))
             events.append(self.event(text, True, start, start + len(audio)))
             self.active = None
         return events
@@ -55,16 +59,20 @@ class StreamRecognizer:
             elif self.segmenter.vad.is_speech_detected():
                 if self.active is None:
                     self.new_segment(self.segmenter.active_start)
-                if self.cursor - self.active["last_partial"] >= int(.6 * SAMPLE_RATE):
+                duration = (self.cursor - self.active["start"]) / SAMPLE_RATE
+                interval = .6 if not self.active["last_text"] else (.8 if duration < 4 else 1.2)
+                if self.cursor - self.active["last_partial"] >= int(interval * SAMPLE_RATE):
                     start = self.active["start"]
-                    text = self.recognizer.transcribe(self.history[-(self.cursor - start):])
+                    text = self.correct(self.recognizer.transcribe(self.history[-(self.cursor - start):]))
                     self.active["last_partial"] = self.cursor
                     previous = self.active["last_text"]
-                    stable = len(os.path.commonprefix([previous, text])) >= 4
-                    if text and (text != previous or stable != self.active["stable"]):
+                    stable_text = os.path.commonprefix([previous, text]).rstrip()
+                    if len(stable_text) < 4:
+                        stable_text = ""
+                    if text and (text != previous or stable_text != self.active["stable_text"]):
                         self.active["last_text"] = text
-                        self.active["stable"] = stable
-                        events.append(self.event(text, False, start, self.cursor, stable=stable))
+                        self.active["stable_text"] = stable_text
+                        events.append(self.event(text, False, start, self.cursor, stable_text=stable_text))
         return events
 
     def finish(self):

@@ -140,7 +140,7 @@ If your server has a domain, set `LIVESUB_DOMAIN` in `.env` and enable the Compo
 
 1. Open `chrome://extensions` in Chrome and enable **Developer mode**.
 2. Click **Load unpacked** and select the project's `extension` directory.
-3. Open the extension settings and enter the server address, gateway access token (`LIVESUB_ACCESS_TOKEN`), and translation model. For an SSH tunnel, use `ws://127.0.0.1:8765/ws`; for a domain, use `wss://your-domain/ws`. Save the settings and allow the connection when prompted.
+3. Open the extension settings and enter the server address, gateway access token (`LIVESUB_ACCESS_TOKEN`), and translation model. Use **Fetch model list** next to the model field to load choices from the API configured on your server. For an SSH tunnel, use `ws://127.0.0.1:8765/ws`; for a domain, use `wss://your-domain/ws`. Save the settings and allow the connection when prompted.
 4. Open a Japanese livestream, click the extension icon to show the **subtitle window**, then click **Start translation**.
 
 ---
@@ -164,8 +164,8 @@ All 364 preset entries are available in the [built-in glossary file](src/livesub
 **Usage:**
 
 1. Open **Glossary** in the floating window and select the groups you need. Click **Edit** to change entries, then **Save to server** to apply them to the current session.
-2. For bulk editing, open extension settings, enter a group name under **Edit glossary** (such as `global`, `streamer:arale`, or `game:bandori`), and click **Load**.
-3. Edit the JSON or import a CSV / JSON file, then click **Save glossary**. Importing fills the editor; saving writes the entire editor contents to that group. **Export JSON** saves the current editor contents to a file.
+2. For bulk editing, open extension settings and choose a **Server glossary**. Use **Refresh glossary list** to reload existing groups, or create a streamer, game, or custom glossary below it.
+3. Switch between **Entry cards / JSON** at the top to edit, or import a CSV / JSON file, then click **Save glossary**. Importing fills the editor; saving writes the entire editor contents to that group. **Export JSON** saves the current editor contents to a file.
 
 **JSON example:**
 

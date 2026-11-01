@@ -75,6 +75,20 @@ async def health():
     return {"status": "ok", "translation_configured": bool(API_KEY), "busy": app.state.session.locked()}
 
 
+@app.get("/models", dependencies=[Depends(authorize)])
+async def translation_models():
+    if not API_KEY:
+        raise HTTPException(503, "服务端尚未配置翻译 API Key。")
+    try:
+        response = await app.state.client.get(API_BASE.rstrip("/") + "/models",
+                                              headers={"Authorization": "Bearer " + API_KEY})
+        response.raise_for_status()
+        models = sorted({item["id"] for item in response.json()["data"]})
+    except (httpx.HTTPError, ValueError, KeyError):
+        raise HTTPException(502, "无法获取云端模型列表，请检查服务端 API 配置或稍后重试。") from None
+    return {"models": models}
+
+
 @app.get("/glossary/{profile}", dependencies=[Depends(authorize)])
 async def glossary_get(profile: str):
     return {"entries": app.state.glossary.get(profile)}
