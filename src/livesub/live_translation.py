@@ -123,10 +123,13 @@ class LiveTranslator:
                     utterances = list(self.utterances.values())
                     index = next((i for i, item in enumerate(utterances)
                                   if item["segment_id"] == event["segment_id"]), len(utterances))
+                    # Use the latest preceding speech, including corrections received after this item began.
+                    previous = ([item["text"] for item in utterances[max(0,index-3):index] if item["text"]]
+                                if index < len(utterances) else state.history)
                     following = [item["text"] for item in utterances[index+1:index+3] if item["text"]]
                     latest = ""
                     async for text in translate(self.client, self.base, self.key, self.model,
-                                                event["text"], state.history, self.terms,
+                                                event["text"], previous, self.terms,
                                                 os.getenv("LIVESUB_REASONING_EFFORT", "minimal"),
                                                 target=self.target, title=self.title,
                                                 following_context=following):
