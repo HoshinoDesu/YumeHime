@@ -94,40 +94,55 @@ class Recognizer:
 class Segmenter:
     """Feed 512-sample frames; keep VAD on one thread."""
 
-    def __init__(self, root: Path, max_seconds: float = 3, silence: float = 0.35):
+    def __init__(self, root: Path, max_seconds: float = 3, silence: float = 0.35, threshold: float = 0.35, min_speech: float = 0.15, tail_padding: float = 0.2, phrase_silence: float | None = None):
         config = sherpa_onnx.VadModelConfig()
         config.silero_vad.model = str(root / "silero_vad.onnx")
-        config.silero_vad.min_silence_duration = silence
-        config.silero_vad.min_speech_duration = 0.15
-        config.silero_vad.threshold = 0.35
+        config.silero_vad.min_silence_duration = phrase_silence or silence
+        config.silero_vad.min_speech_duration = min_speech
+        config.silero_vad.threshold = threshold
         config.silero_vad.max_speech_duration = 60
         config.sample_rate = SAMPLE_RATE
         config.num_threads = 1
         self.vad = sherpa_onnx.VoiceActivityDetector(config, buffer_size_in_seconds=65)
         self.head_padding = int(0.8 * SAMPLE_RATE)
-        self.tail_padding = int(0.2 * SAMPLE_RATE)
+        self.tail_padding = int(tail_padding * SAMPLE_RATE)
         self.silence_samples = int(silence * SAMPLE_RATE)
+        self.vad_silence_samples = int((phrase_silence or silence) * SAMPLE_RATE)
+        self.quiet_start = None
+        self.last_end = 0
         self.max_samples = int(max_seconds * SAMPLE_RATE)
         self.buffer = np.empty(0, dtype=np.float32)
         self.total = 0
         self.buffer_limit = int((max_seconds + silence + 2) * SAMPLE_RATE)
         self.active_start = None
 
-    def feed(self, frame: np.ndarray):
+    def feed(self, frame: np.ndarray, vad_frame: np.ndarray | None = None):
         self.buffer = np.concatenate([self.buffer, frame])[-self.buffer_limit:]
         self.total += len(frame)
-        self.vad.accept_waveform(frame)
+        self.vad.accept_waveform(frame if vad_frame is None else vad_frame)
         while not self.vad.empty():
             self.vad.pop()
         speaking = self.vad.is_speech_detected()
         if speaking and self.active_start is None:
-            self.active_start = max(0, self.total - self.head_padding)
+            self.active_start = max(0, self.last_end - int(0.2 * SAMPLE_RATE), self.total - self.head_padding)
         if self.active_start is None:
             return []
-        if not speaking:
-            end = max(self.active_start, self.total - self.silence_samples + self.tail_padding)
+        if speaking:
+            self.quiet_start = None
+        else:
+            if self.quiet_start is None:
+                self.quiet_start = self.total
+            # Keep short pauses inside a phrase; use them as boundaries after six seconds.
+            wait = self.silence_samples - self.vad_silence_samples
+            if self.quiet_start - self.active_start >= 6 * SAMPLE_RATE:
+                wait = 0
+            if self.total - self.quiet_start < wait:
+                return []
+            end = min(self.total, max(self.active_start, self.quiet_start - self.vad_silence_samples + self.tail_padding))
             result = self.extract(self.active_start, end)
+            self.last_end = end
             self.active_start = None
+            self.quiet_start = None
             return [result] if len(result[1]) else []
         if self.total - self.active_start >= self.max_samples:
             result = self.extract(self.active_start, self.total)

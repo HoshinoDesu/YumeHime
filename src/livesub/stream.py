@@ -5,12 +5,14 @@ import os
 import numpy as np
 
 from .asr import FRAME, SAMPLE_RATE, Recognizer, Segmenter
+from .audio import SpeechLeveler
 
 
 class StreamRecognizer:
     def __init__(self, recognizer: Recognizer, models: Path, terms: list[dict]):
         self.recognizer = recognizer
-        self.segmenter = Segmenter(models, max_seconds=8, silence=0.65)
+        self.segmenter = Segmenter(models, max_seconds=8, silence=0.65, threshold=0.35, min_speech=0.1, tail_padding=0.3, phrase_silence=0.32)
+        self.leveler = SpeechLeveler()
         self.terms = terms
         self.remainder = np.empty(0, dtype=np.float32)
         self.history = np.empty(0, dtype=np.float32)
@@ -53,7 +55,7 @@ class StreamRecognizer:
             frame, self.remainder = self.remainder[:FRAME], self.remainder[FRAME:]
             self.history = np.concatenate([self.history, frame])[-SAMPLE_RATE * 10:]
             self.cursor += FRAME
-            segments = self.segmenter.feed(frame)
+            segments = self.segmenter.feed(frame, self.leveler.process(frame))
             if segments:
                 events.extend(self.final_events(segments))
             elif self.segmenter.vad.is_speech_detected():

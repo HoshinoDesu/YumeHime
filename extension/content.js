@@ -65,7 +65,7 @@
     .lyrics-viewport { position:absolute;inset:0;overflow:hidden;border-radius:15px;cursor:grab;touch-action:none;user-select:none; }
     .lyrics-mask { position:absolute;inset:0;mask-image:linear-gradient(transparent,#000 7%,#000 93%,transparent); }
     .lyrics { position:absolute;inset:0; }
-    .lyric-row { position:absolute;left:28px;right:28px;top:0;opacity:0;visibility:hidden;filter:blur(.3px);transform-origin:left center;transition:opacity 240ms ease-out,filter 240ms ease-out,transform 450ms cubic-bezier(.2,.8,.2,1);overflow-wrap:anywhere; }
+    .lyric-row { position:absolute;left:28px;right:28px;top:0;opacity:0;visibility:hidden;filter:blur(.3px);transform-origin:left top;transition:none;overflow-wrap:anywhere; }
     .lyric-row.previous { opacity:.45;visibility:visible; }
     .lyric-row.active { opacity:1;visibility:visible;filter:none; }
     .ja,.zh { margin:0;font-weight:400;font-optical-sizing:auto;line-height:1.35;text-shadow:var(--subtitle-shadow); }
@@ -200,30 +200,63 @@
     win.classList.toggle("locked", !!config.positionLocked); $(".lock").setAttribute("aria-pressed", String(!!config.positionLocked)); $(".grip").disabled = !!config.positionLocked; $(".lock").innerHTML = icon(config.positionLocked ? "lock" : "unlock"); $(".lock").title = config.positionLocked ? "解锁窗口" : "锁定窗口"; $(".lock").setAttribute("aria-label", $(".lock").title);
     place(); renderLyrics(true);
   }
-  function center(instant) {
+  function captureRows(){
+    const positions=new Map();
+    for(const row of rows.values()){
+      if(!row.classList.contains("active")&&!row.classList.contains("previous"))continue;
+      const style=getComputedStyle(row),matrix=new DOMMatrixReadOnly(style.transform);
+      positions.set(row,{y:matrix.m42,scale:matrix.a,font:parseFloat(getComputedStyle(row.children[1]).fontSize),opacity:Number(style.opacity),height:row.getBoundingClientRect().height,remaining:row._movement?Math.max(0,420-Number(row._movement.currentTime||0)):0});
+    }
+    return positions;
+  }
+  function center(instant,before=new Map()) {
     const index=pages.findIndex(page=>page.key===activeKey);if(index<0)return;
     const current=rows.get(activeKey),previous=rows.get(pages[index-1]?.key),gap=previous?8:0;
-    const reset = instant || layoutKey !== activeKey;
+    const changed=layoutKey!==activeKey,animateChange=changed&&layoutKey!==null;
+    const reset = instant || changed;
+    const previousScale=.82;
     if(reset) current.style.setProperty("--row-scale",1);
     if(previous){
       if(reset) previous.style.setProperty("--row-scale",1);
       const available=viewport.clientHeight-current.offsetHeight-gap-12;
       const scale=Number(previous.style.getPropertyValue("--row-scale"))||1;
-      previous.style.setProperty("--row-scale",Math.min(scale,Math.max(.22,scale*available/previous.offsetHeight)));
+      previous.style.setProperty("--row-scale",Math.min(scale,Math.max(.22,scale*available/(previous.offsetHeight*previousScale))));
     }
-    const currentAvailable=viewport.clientHeight-(previous?previous.offsetHeight+gap:0)-12;
+    const currentAvailable=viewport.clientHeight-(previous?previous.offsetHeight*previousScale+gap:0)-12;
     for(let i=0;i<4&&current.offsetHeight>currentAvailable;i++){
       const scale=Number(current.style.getPropertyValue("--row-scale"));
       current.style.setProperty("--row-scale",Math.max(.08,scale*currentAvailable/current.offsetHeight*.97));
     }
-    const previousHeight=previous?previous.offsetHeight+gap:0;
+    const previousHeight=previous?previous.offsetHeight*previousScale+gap:0;
     const desired=Math.max(4,(viewport.clientHeight-current.offsetHeight-previousHeight)/2)+previousHeight;
     activeTop=reset||activeTop===null?desired:Math.max(previousHeight+4,Math.min(activeTop,viewport.clientHeight-current.offsetHeight-4));
-    const position=(row,y)=>{row.style.transition=instant?"none":"";const transform=`translate3d(0,${y}px,0)`;if(row.style.transform!==transform)row.style.transform=transform;};
-    if(previous)position(previous,activeTop-previousHeight);
-    position(current,activeTop);layoutKey=activeKey;
+    const position=(row,y,scale)=>{
+      const target=`translate3d(0,${y}px,0) scale(${scale})`,old=before.get(row);
+      const font=parseFloat(getComputedStyle(row.children[1]).fontSize);
+      const fontChanged=old&&Math.abs(old.font-font)>.05;
+      if(!instant&&!animateChange&&!fontChanged&&row._movement&&row._target===target)return;
+      row._movement?.cancel();row._movement=null;
+      row.style.transform=target;row._target=target;
+      if(instant||motion.matches||(!animateChange&&!fontChanged&&(!old||Math.abs(old.y-y)<.1)))return;
+      const offset=Math.min(96,Math.max(32,previous?(before.get(previous)?.height||previousHeight):48));
+      const enteringY=Math.max(y+offset,previous&&before.has(previous)?before.get(previous).y+before.get(previous).height+gap:y+offset);
+      const from=old?`translate3d(0,${old.y}px,0) scale(${old.scale*old.font/font})`:`translate3d(0,${enteringY}px,0) scale(.94)`;
+      const opacity=row.classList.contains("active")?1:.45;
+      const duration=animateChange?420:(old?.remaining||180);
+      const animation=row.animate([{transform:from,opacity:old?.opacity??0},{transform:target,opacity}],{duration,easing:"cubic-bezier(.22,1,.36,1)"});
+      animation.id="yumehime-lyrics";row._movement=animation;
+      animation.onfinish=()=>{if(row._movement===animation)row._movement=null;};
+    };
+    if(previous)position(previous,activeTop-previousHeight,previousScale);
+    position(current,activeTop,1);layoutKey=activeKey;
   }
-  function markRows(){const index=pages.findIndex(page=>page.key===activeKey);for(const [i,page]of pages.entries()){rows.get(page.key).classList.toggle("active",i===index);rows.get(page.key).classList.toggle("previous",i===index-1);}}
+  function markRows(){
+    const index=pages.findIndex(page=>page.key===activeKey);
+    for(const [i,page]of pages.entries()){
+      const row=rows.get(page.key);row.classList.toggle("active",i===index);row.classList.toggle("previous",i===index-1);
+      if(i!==index&&i!==index-1){row._movement?.cancel();row._movement=null;}
+    }
+  }
   function scheduleRender(){
     if(!renderFrame)renderFrame=requestAnimationFrame(()=>{renderFrame=0;renderLyrics();});
   }
@@ -243,6 +276,7 @@
     cancelAnimationFrame(renderFrame);renderFrame=0;
     if (!visible || !viewport.clientWidth) return;
     lastRender=performance.now();
+    const before=captureRows();
     const next = [];
     for (const [id,data] of raw) {
       if(!data.original?.text||(config.subtitleSpeed==="finalOnly"&&(!data.original.final||(capture.translationEnabled!==false&&!data.translation?.final))))continue;
@@ -257,7 +291,7 @@
     pages=next;$(".empty").hidden=!!pages.length;
     if (!pages.length) { activeKey=null;return; }
     const translated=pages.filter(page=>page.zh);
-    activeKey=capture.translationEnabled!==false&&translated.length?translated.at(-1).key:pages.at(-1).key;markRows();center(instant);
+    activeKey=capture.translationEnabled!==false&&translated.length?translated.at(-1).key:pages.at(-1).key;markRows();center(instant,before);
   }
   new ResizeObserver(() => { if (visible) renderLyrics(true); }).observe(viewport);
   new ResizeObserver(()=>{if(visible)place();}).observe($(".chrome"));
