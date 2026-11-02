@@ -1,4 +1,6 @@
 import json
+import logging
+from contextlib import asynccontextmanager
 import re
 import unicodedata
 
@@ -17,6 +19,54 @@ Translate only source_item, once; do not repeat the previous or following senten
 
 class TranslationError(Exception):
     pass
+
+
+logger = logging.getLogger(__name__)
+_reasoning_levels = {}
+
+
+def supported_reasoning(message: str, current: str):
+    message = message.lower()
+    rejected_level = re.search(r"level\s+[\"']?" + re.escape(current.lower()) + r"[\"']?\s+not supported", message)
+    if rejected_level and "valid levels:" in message:
+        levels = set(re.findall(r"\b(?:none|minimal|low|medium|high|xhigh)\b", message.split("valid levels:", 1)[1]))
+        return next((level for level in ["none", "minimal", "low", "medium", "high", "xhigh"] if level in levels), None)
+    if "reasoning_effort" in message and any(word in message for word in ["unsupported", "not supported", "unknown parameter", "unrecognized"]):
+        return ""
+    return None
+
+
+@asynccontextmanager
+async def completion(client, base, key, payload, reasoning):
+    cache_key = (base, payload["model"], reasoning)
+    selected = _reasoning_levels.get(cache_key, reasoning)
+    for retry in range(2):
+        if selected:
+            payload["reasoning_effort"] = selected
+        else:
+            payload.pop("reasoning_effort", None)
+        async with client.stream("POST", base.rstrip("/") + "/chat/completions",
+                                 headers={"Authorization": "Bearer " + key}, json=payload) as response:
+            if response.status_code != 200:
+                await response.aread()
+                try:
+                    error = response.json().get("error", {})
+                except ValueError:
+                    error = {}
+                error = error if isinstance(error, dict) else {}
+                replacement = supported_reasoning(str(error.get("message", "")), selected) if selected else None
+                if response.status_code == 400 and retry == 0 and replacement is not None and replacement != selected:
+                    logger.warning("Translation API rejected reasoning_effort=%s; retrying with %s (model=%s)",
+                                   selected, replacement or "parameter omitted", payload["model"])
+                    selected = replacement
+                    _reasoning_levels[cache_key] = selected
+                    continue
+                # Only log error fields, never the prompt, response body or credentials.
+                safe = lambda field: re.sub(r"[^a-zA-Z0-9_.\[\]-]", "", str(error.get(field, "")))[:80]
+                logger.warning("Translation API error: HTTP %s model=%s type=%s code=%s param=%s",
+                               response.status_code, payload["model"], safe("type"), safe("code"), safe("param"))
+            yield response
+            return
 
 
 def source_echo(source, output, terms, partial=False):
@@ -55,11 +105,8 @@ async def translate(client: httpx.AsyncClient, base: str, key: str, model: str,
         payload = {"model": model, "stream": True, "max_tokens": 256, "messages": [
             {"role": "system", "content": SYSTEM.format(target=language)},
             {"role": "user", "content": instruction + json.dumps(source, ensure_ascii=False)}]}
-        if reasoning:
-            payload["reasoning_effort"] = reasoning
         output = ""
-        async with client.stream("POST", base.rstrip("/") + "/chat/completions",
-                                 headers={"Authorization": "Bearer " + key}, json=payload) as response:
+        async with completion(client, base, key, payload, reasoning) as response:
             if response.status_code != 200:
                 raise TranslationError(f"翻译接口返回 HTTP {response.status_code}")
             async for line in response.aiter_lines():
