@@ -20,6 +20,7 @@ class Segment:
     translated_text: str = ""
     final_sent: bool = False
     waiting: bool = False
+    visible_text: str = ""
 
 
 class LiveTranslator:
@@ -63,6 +64,9 @@ class LiveTranslator:
                     del self.states[key]
 
     async def emit(self, state, event, text, final):
+        if not final and text == state.visible_text:
+            return
+        state.visible_text = text
         state.revision += 1
         await self.send({**event, "kind": "translation", "revision": state.revision,
                          "source_revision": event["revision"], "final": final, "text": text})
@@ -127,13 +131,15 @@ class LiveTranslator:
                                                 target=self.target, title=self.title,
                                                 following_context=following):
                         latest = text
-                        if self.compatible(event["text"], state.latest["text"]):
+                        if self.compatible(event["text"], state.latest["text"]) and len(text) >= len(state.visible_text):
                             await self.emit(state, event, text, False)
             if self.compatible(event["text"], state.latest["text"]):
                 state.translated_source, state.translated_text = event["text"], latest
                 if state.latest["text"] == event["text"] and state.latest["final"]:
                     await self.emit(state, state.latest, latest, True)
                     state.final_sent = True
+                elif latest != state.visible_text:
+                    await self.emit(state, event, latest, False)
         except asyncio.CancelledError:
             if self.closing:
                 raise

@@ -99,7 +99,7 @@
   </section>`;
   const $ = selector => shadow.querySelector(selector), win = $(".window"), viewport = $(".lyrics-viewport"), track = $(".lyrics");
   let config = {}, capture = { running: false }, visible = false, session = null, gesture = null, gestureFrame;
-  let box = { left: 0, top: 0, width: 560, height: 220 }, raw = new Map(), rows = new Map(), pages = [], activeKey = null, renderTimer,lastRender=0;
+  let box = { left: 0, top: 0, width: 560, height: 220 }, raw = new Map(), rows = new Map(), pages = [], activeKey = null, renderTimer, renderFrame=0, lastRender=0, layoutKey=null, activeTop=null;
   let idleTimer;
   const localization=globalThis.YumeHimeI18n.watch(shadow,()=>config.uiLanguage);
   let profiles = [], editProfile = null, termDraft = [];
@@ -203,30 +203,44 @@
   function center(instant) {
     const index=pages.findIndex(page=>page.key===activeKey);if(index<0)return;
     const current=rows.get(activeKey),previous=rows.get(pages[index-1]?.key),gap=previous?8:0;
-    current.style.setProperty("--row-scale",1);
+    const reset = instant || layoutKey !== activeKey;
+    if(reset) current.style.setProperty("--row-scale",1);
     if(previous){
-      previous.style.setProperty("--row-scale",1);
+      if(reset) previous.style.setProperty("--row-scale",1);
       const available=viewport.clientHeight-current.offsetHeight-gap-12;
-      previous.style.setProperty("--row-scale",Math.min(1,Math.max(.22,available/previous.offsetHeight)));
+      const scale=Number(previous.style.getPropertyValue("--row-scale"))||1;
+      previous.style.setProperty("--row-scale",Math.min(scale,Math.max(.22,scale*available/previous.offsetHeight)));
     }
     const currentAvailable=viewport.clientHeight-(previous?previous.offsetHeight+gap:0)-12;
     for(let i=0;i<4&&current.offsetHeight>currentAvailable;i++){
       const scale=Number(current.style.getPropertyValue("--row-scale"));
       current.style.setProperty("--row-scale",Math.max(.08,scale*currentAvailable/current.offsetHeight*.97));
     }
-    const height=current.offsetHeight+(previous?previous.offsetHeight+gap:0),top=Math.max(4,(viewport.clientHeight-height)/2);
-    const position=(row,y,scale)=>{row.style.transition=instant?"none":"";row.style.transform=`translate3d(0,${y}px,0) scale(${scale})`;};
-    if(previous)position(previous,top,1);
-    position(current,top+(previous?previous.offsetHeight+gap:0),1);
+    const previousHeight=previous?previous.offsetHeight+gap:0;
+    const desired=Math.max(4,(viewport.clientHeight-current.offsetHeight-previousHeight)/2)+previousHeight;
+    activeTop=reset||activeTop===null?desired:Math.max(previousHeight+4,Math.min(activeTop,viewport.clientHeight-current.offsetHeight-4));
+    const position=(row,y)=>{row.style.transition=instant?"none":"";const transform=`translate3d(0,${y}px,0)`;if(row.style.transform!==transform)row.style.transform=transform;};
+    if(previous)position(previous,activeTop-previousHeight);
+    position(current,activeTop);layoutKey=activeKey;
   }
   function markRows(){const index=pages.findIndex(page=>page.key===activeKey);for(const [i,page]of pages.entries()){rows.get(page.key).classList.toggle("active",i===index);rows.get(page.key).classList.toggle("previous",i===index-1);}}
+  function scheduleRender(){
+    if(!renderFrame)renderFrame=requestAnimationFrame(()=>{renderFrame=0;renderLyrics();});
+  }
   function queueRender(event){
     clearTimeout(renderTimer);
     const interval=config.subtitleSpeed==="finalOnly"?0:Number(config.subtitleSpeed??1000);
     const delay=event.final||event.kind==="translation"?0:Math.max(0,interval-(performance.now()-lastRender));
-    if(delay)renderTimer=setTimeout(()=>renderLyrics(),delay);else renderLyrics();
+    if(delay)renderTimer=setTimeout(scheduleRender,delay);else scheduleRender();
+  }
+  function updateText(element,text){
+    const node=element.firstChild||element.appendChild(document.createTextNode(""));
+    if(node.data===text)return;
+    let common=0;while(common<node.length&&common<text.length&&node.data[common]===text[common])common++;
+    node.replaceData(common,node.length-common,text.slice(common));
   }
   function renderLyrics(instant=false) {
+    cancelAnimationFrame(renderFrame);renderFrame=0;
     if (!visible || !viewport.clientWidth) return;
     lastRender=performance.now();
     const next = [];
@@ -238,7 +252,7 @@
     for (const page of next) {
       let row = rows.get(page.key);
       if (!row) { row = document.createElement("div"); row.className = "lyric-row"; const ja=document.createElement("div"),zh=document.createElement("div");ja.className="ja";ja.lang="ja";zh.className="zh";row.append(ja,zh);rows.set(page.key,row); }
-      row.children[0].textContent=page.ja;row.children[1].textContent=page.zh;row.children[1].lang=config.targetLanguage||"zh-CN";track.append(row);
+      updateText(row.children[0],page.ja);updateText(row.children[1],page.zh);row.children[1].lang=config.targetLanguage||"zh-CN";if(row.parentNode!==track)track.append(row);
     }
     pages=next;$(".empty").hidden=!!pages.length;
     if (!pages.length) { activeKey=null;return; }
@@ -264,7 +278,7 @@
   $(".word-back").onclick=()=>{$(".word-editor").hidden=true;$(".word-selection").hidden=false;loadProfiles();};
   $(".word-editor").onsubmit=async event=>{event.preventDefault();const button=$(".save-terms");button.disabled=true;try{await rpc("glossarySave",{profile:editProfile,entries:termEditor.get(true)});wordNotice("已保存到服务器，正在使用的词库已更新。");}catch(error){wordNotice(error.message);}finally{button.disabled=false;}};
   $(".create-profile").onsubmit=async event=>{event.preventDefault();const name=$(".profile-name").value.trim();if(!name||name.includes("/")){wordNotice("名称不能为空或包含 /。");return;}const id=`${$(".profile-kind").value}:${name}`;try{await rpc("glossaryCreate",{name:id});$(".profile-name").value="";await loadProfiles();await openEditor(id);}catch(error){wordNotice(error.message);}};
-  function clearLyrics(){clearTimeout(renderTimer);raw.clear();pages=[];rows.clear();track.replaceChildren();activeKey=null;lastRender=0;$(".empty").hidden=false;}
+  function clearLyrics(){clearTimeout(renderTimer);cancelAnimationFrame(renderFrame);renderFrame=0;layoutKey=null;activeTop=null;raw.clear();pages=[];rows.clear();track.replaceChildren();activeKey=null;lastRender=0;$(".empty").hidden=false;}
   chrome.storage.local.get("settings").then(value=>applySettings(value.settings));
   chrome.storage.onChanged.addListener((changes,area)=>{if(area==="local"&&changes.settings)applySettings(changes.settings.newValue);});
   chrome.runtime.onMessage.addListener(message=>{

@@ -98,15 +98,20 @@ async def translate(client: httpx.AsyncClient, base: str, key: str, model: str,
     language = LANGUAGES[target]
     relevant = [term for term in terms if term["source"] in text or any(a in text for a in [*term.get("aliases", []), *term.get("variants", [])])]
     source = {"livestream_title":title,"context": context[-3:], "following_context":following_context or [], "terminology": {t["source"]: {"preferred_target":t["target"], "note":t.get("note", ""), "variants":t.get("variants", [])} for t in relevant[:80]}, "source_item": text}
+    deepseek = model.rsplit("/", 1)[-1].lower().startswith("deepseek")
+    budget = min(2048, max(1024 if deepseek else 512, len(text) * 4 + 128))
     for attempt in range(2):
         instruction = f"Translate source_item into {language}. Return only the {language} translation.\n"
         if attempt:
             instruction += f"The previous response was not a valid translation. Translate the full source_item into {language}; output meaningful translated words.\n"
-        payload = {"model": model, "stream": True, "max_tokens": 256, "messages": [
+        payload = {"model": model, "stream": True, "max_tokens": budget, "messages": [
             {"role": "system", "content": SYSTEM.format(target=language)},
             {"role": "user", "content": instruction + json.dumps(source, ensure_ascii=False)}]}
+        if deepseek:
+            payload["thinking"] = {"type": "disabled"}
         output = ""
-        async with completion(client, base, key, payload, reasoning) as response:
+        truncated = False
+        async with completion(client, base, key, payload, "" if deepseek else reasoning) as response:
             if response.status_code != 200:
                 raise TranslationError(f"翻译接口返回 HTTP {response.status_code}")
             async for line in response.aiter_lines():
@@ -126,7 +131,15 @@ async def translate(client: httpx.AsyncClient, base: str, key: str, model: str,
                         if not empty_translation(text, output) and not source_echo(text, output, relevant, partial=True) and not placeholder_translation(text, output, partial=True):
                             yield output
                     if choice.get("finish_reason") == "length":
-                        raise TranslationError("本句译文超过输出长度限制")
+                        truncated = True
+                if truncated:
+                    break
+        if truncated:
+            logger.warning("Translation output truncated: model=%s budget=%s attempt=%s", model, budget, attempt + 1)
+            if attempt == 0:
+                budget = min(4096, budget * 2)
+                continue
+            raise TranslationError("本句译文超过输出长度限制")
         if not output.strip():
             raise TranslationError("翻译接口未返回文字")
         if not empty_translation(text, output) and not source_echo(text, output, relevant) and not placeholder_translation(text, output):
