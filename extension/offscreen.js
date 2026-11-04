@@ -62,8 +62,15 @@ function connect(current) {
       state(close.code === 4401 ? "访问令牌不正确" : "服务器不接受当前配置");
       return;
     }
-    console.warn("YumeHime connection closed", { code: close.code, reason: close.reason });
-    state(close.code === 4409 ? "服务器已有会话，稍后重试" : failure || (close.code === 4000 ? "音频上传积压，正在重连" : "连接中断，正在重连"));
+    console.warn(`YumeHime connection closed: code=${close.code}; reason=${close.reason || "No close reason received"}; clean=${close.wasClean}`);
+    const messages = {
+      1006: "连接中断，未收到关闭原因，正在重连",
+      1013: "音频处理积压，正在重新连接",
+      4000: "音频上传积压，正在重连",
+      4004: "服务器未收到音频，正在重连",
+      4409: "服务器已有会话，稍后重试"
+    };
+    state(failure || messages[close.code] || "连接中断，正在重连");
     reconnect = setTimeout(() => connect(current), close.code === 4409 ? 1000 : 2000);
   };
   connection.onerror = () => { if (current === generation && socket === connection) state("无法连接服务器，正在重试"); };

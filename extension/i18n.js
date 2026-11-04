@@ -166,6 +166,8 @@
     ["服务器请使用 wss://；SSH 隧道可使用 ws://127.0.0.1。","Use wss:// for the server, or ws://127.0.0.1 for an SSH tunnel.","伺服器請使用 wss://；SSH 通道可使用 ws://127.0.0.1。"]
   ];
   entries.push(
+    ["连接中断，未收到关闭原因，正在重连", "Connection lost without a close reason; reconnecting", "連線中斷，未收到關閉原因，正在重新連線"],
+    ["服务器未收到音频，正在重连", "Server stopped receiving audio; reconnecting", "伺服器未收到音訊，正在重新連線"],
     ["连接服务器超时，正在重试", "Server connection timed out; retrying", "連接伺服器逾時，正在重試"],
     ["连接响应超时，正在重连", "Connection stopped responding; reconnecting", "連線回應逾時，正在重新連線"],
     ["音频上传积压，正在重连", "Audio upload is behind; reconnecting", "音訊上傳延遲，正在重新連線"],
