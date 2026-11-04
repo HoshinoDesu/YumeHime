@@ -1,5 +1,10 @@
-let stream, audio, monitor, socket, reconnect, config, worklet;
+let stream, audio, monitor, socket, reconnect, handshake, heartbeat, pong, config, worklet;
 let running = false, paused = false, ready = false, generation = 0;
+function clearConnectionTimers() {
+  clearTimeout(handshake);
+  clearInterval(heartbeat);
+  clearTimeout(pong);
+}
 function state(message = "", connected = false) {
   chrome.runtime.sendMessage({ to: "background", type: "state", state: { running, paused, connected, message } }).catch(() => {});
 }
@@ -8,34 +13,60 @@ function event(value) {
 }
 function connect(current) {
   if (!running || paused || current !== generation) return;
+  clearTimeout(reconnect);
+  clearConnectionTimers();
   ready = false;
   state("正在连接服务器");
   const connection = new WebSocket(config.url);
   socket = connection;
-  connection.onopen = () => connection.send(JSON.stringify({ type: "start", token: config.token,
-    model: config.model, title:config.title||"", target: config.targetLanguage || "zh-CN", profiles: config.profiles.split(",").map(s => s.trim()).filter(Boolean) }));
-  socket.onmessage = message => {
-    if (current !== generation) return;
+  let failure = "";
+  let notice = false;
+  handshake = setTimeout(() => {
+    failure = "连接服务器超时，正在重试";
+    state(failure);
+    connection.close(4002, "Server ready timeout");
+  }, 10000);
+  connection.onopen = () => {
+    if (current !== generation || socket !== connection) return;
+    connection.send(JSON.stringify({ type: "start", token: config.token,
+      model: config.model, title:config.title||"", target: config.targetLanguage || "zh-CN", profiles: config.profiles.split(",").map(s => s.trim()).filter(Boolean) }));
+  };
+  connection.onmessage = message => {
+    if (current !== generation || socket !== connection) return;
     const data = JSON.parse(message.data);
+    if (data.type === "pong") { clearTimeout(pong); return; }
     if (data.type === "ready") {
+      clearTimeout(handshake);
       ready = true;
+      heartbeat = setInterval(() => {
+        connection.send(JSON.stringify({ type: "ping" }));
+        pong = setTimeout(() => {
+          failure = "连接响应超时，正在重连";
+          ready = false;
+          state(failure);
+          connection.close(4003, "Heartbeat timeout");
+        }, 8000);
+      }, 15000);
       state(data.translation_enabled ? "翻译中" : "显示日文原文", true);
     }
-    if (data.type === "translation_error" || data.type === "status") state(data.message, true);
+    if (data.type === "translation_error" || data.type === "status") { notice = true; state(data.message, true); }
+    if (notice && data.type === "subtitle" && data.kind === "translation" && data.final) { notice = false; state("翻译中", true); }
     event(data);
   };
-  socket.onclose = async close => {
-    if (current !== generation || !running || paused) return;
+  connection.onclose = async close => {
+    if (current !== generation || socket !== connection || !running || paused) return;
+    clearConnectionTimers();
     ready = false;
     if ([4400, 4401].includes(close.code)) {
       await stop();
       state(close.code === 4401 ? "访问令牌不正确" : "服务器不接受当前配置");
       return;
     }
-    state(close.code === 4409 ? "服务器已有会话，稍后重试" : "连接中断，正在重连");
+    console.warn("YumeHime connection closed", { code: close.code, reason: close.reason });
+    state(close.code === 4409 ? "服务器已有会话，稍后重试" : failure || (close.code === 4000 ? "音频上传积压，正在重连" : "连接中断，正在重连"));
     reconnect = setTimeout(() => connect(current), close.code === 4409 ? 1000 : 2000);
   };
-  socket.onerror = () => { if (current === generation) state("无法连接服务器，正在重试"); };
+  connection.onerror = () => { if (current === generation && socket === connection) state("无法连接服务器，正在重试"); };
 }
 async function stop() {
   running = false;
@@ -43,6 +74,7 @@ async function stop() {
   ready = false;
   generation++;
   clearTimeout(reconnect);
+  clearConnectionTimers();
   socket?.close();
   worklet?.disconnect();
   stream?.getTracks().forEach(track => track.stop());
@@ -55,6 +87,7 @@ async function pause() {
   ready = false;
   generation++;
   clearTimeout(reconnect);
+  clearConnectionTimers();
   socket?.close();
   socket = null;
   await audio?.suspend();
@@ -98,7 +131,7 @@ async function start(message) {
     worklet.connect(audio.destination);
     worklet.port.onmessage = ({ data }) => {
       if (ready && socket?.readyState === WebSocket.OPEN) {
-        if (socket.bufferedAmount > 64000) socket.close(1013, "Audio upload delayed");
+        if (socket.bufferedAmount > 64000) { ready = false; socket.close(4000, "Audio upload delayed"); }
         else socket.send(data);
       }
     };

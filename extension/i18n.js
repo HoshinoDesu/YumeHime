@@ -165,6 +165,15 @@
     ["翻译接口未返回有效译文，请重试或切换翻译模型","No valid translation returned. Retry or change the model.","翻譯服務未傳回有效譯文，請重試或切換翻譯模型"],
     ["服务器请使用 wss://；SSH 隧道可使用 ws://127.0.0.1。","Use wss:// for the server, or ws://127.0.0.1 for an SSH tunnel.","伺服器請使用 wss://；SSH 通道可使用 ws://127.0.0.1。"]
   ];
+  entries.push(
+    ["连接服务器超时，正在重试", "Server connection timed out; retrying", "連接伺服器逾時，正在重試"],
+    ["连接响应超时，正在重连", "Connection stopped responding; reconnecting", "連線回應逾時，正在重新連線"],
+    ["音频上传积压，正在重连", "Audio upload is behind; reconnecting", "音訊上傳延遲，正在重新連線"],
+    ["翻译请求排队超时", "Translation queue timed out", "翻譯請求排隊逾時"],
+    ["云端翻译响应超时", "Cloud translation timed out", "雲端翻譯回應逾時"],
+    ["云端翻译连接失败", "Cloud translation connection failed", "雲端翻譯連線失敗"],
+    ["云端翻译响应格式异常", "Invalid cloud translation response", "雲端翻譯回應格式異常"]
+  );
   const messages=new Map(entries.map(([source,en,tw])=>[source,{en,"zh-TW":tw,"zh-CN":source}]));
   function detectLanguage(language){
     const value=(language??globalThis.chrome?.i18n?.getUILanguage?.()??globalThis.navigator?.language??"en").replaceAll("_","-").toLowerCase();

@@ -280,7 +280,8 @@
     const next = [];
     for (const [id,data] of raw) {
       if(!data.original?.text||(config.subtitleSpeed==="finalOnly"&&(!data.original.final||(capture.translationEnabled!==false&&!data.translation?.final))))continue;
-      next.push({key:id,ja:config.showJapanese===false?"":data.original.text,zh:config.subtitleSpeed==="finalOnly"&&!data.translation?.final?"":data.translation?.text||""});
+      const translation=config.subtitleSpeed==="finalOnly"&&!data.translation?.final?null:data.translation;
+      next.push({key:id,ja:config.showJapanese===false?"":translation?.source_text||data.original.text,zh:translation?.text||""});
     }
     const keys = new Set(next.map(page=>page.key)); for (const [key,row] of rows) if (!keys.has(key)) { row.remove(); rows.delete(key); }
     for (const page of next) {
@@ -324,7 +325,11 @@
     if(message.type!=="event")return;const data=message.event;
     if(data.type==="ready"){clearLyrics();session=data.session_id;capture.translationEnabled=data.translation_enabled;return;}
     if(session&&data.session_id!==session)return;
-    if(data.type==="translation_error"){status(data.message);return;}
+    if(data.type==="translation_error"){
+      const item=raw.get(data.segment_id);
+      if(data.discard_partial&&item?.translation&&!item.translation.final&&data.source_revision>=item.translation.source_revision){delete item.translation;scheduleRender();}
+      status(data.message);return;
+    }
     if(data.type!=="subtitle")return;session=data.session_id;
     if(data.kind==="translation"&&!raw.has(data.segment_id))return;
     const item=raw.get(data.segment_id)||{},previous=item[data.kind];if(previous&&(previous.revision>=data.revision||previous.final))return;

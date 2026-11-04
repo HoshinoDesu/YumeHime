@@ -27,6 +27,7 @@ TOKEN = os.getenv("LIVESUB_ACCESS_TOKEN", "")
 API_BASE = os.getenv("LIVESUB_API_BASE", "https://generativelanguage.googleapis.com/v1beta/openai")
 API_KEY = os.getenv("LIVESUB_API_KEY", "")
 MODEL = os.getenv("LIVESUB_MODEL", "gemini-3.5-flash-lite")
+AUDIO_IDLE_TIMEOUT = 15
 
 
 @asynccontextmanager
@@ -172,13 +173,18 @@ async def websocket(ws: WebSocket):
 
         worker = asyncio.create_task(process())
         receive = None
+        last_audio = asyncio.get_running_loop().time()
         try:
             await send({"type": "ready", "translation_enabled": bool(API_KEY)})
             logger.info("session started: %s", session_id)
             while True:
                 # Surface worker failures immediately instead of leaving capture running.
                 receive = asyncio.create_task(ws.receive())
-                done, _ = await asyncio.wait([receive, worker], return_when=asyncio.FIRST_COMPLETED)
+                done, _ = await asyncio.wait([receive, worker], timeout=max(0, last_audio+AUDIO_IDLE_TIMEOUT-asyncio.get_running_loop().time()), return_when=asyncio.FIRST_COMPLETED)
+                if not done:
+                    logger.warning("Session released after %.0f seconds without audio", AUDIO_IDLE_TIMEOUT)
+                    await ws.close(4004, "Audio stream inactive")
+                    break
                 if worker in done:
                     receive.cancel()
                     await asyncio.gather(receive, return_exceptions=True)
@@ -189,6 +195,7 @@ async def websocket(ws: WebSocket):
                     break
                 pcm = message.get("bytes")
                 if pcm is not None:
+                    last_audio = asyncio.get_running_loop().time()
                     if not pcm or len(pcm) % 2 or len(pcm) > 6400:
                         await ws.close(4400)
                         break
@@ -207,7 +214,9 @@ async def websocket(ws: WebSocket):
                     break
                 elif message.get("text"):
                     update = json.loads(message["text"])
-                    if update.get("type") == "profiles":
+                    if update.get("type") == "ping":
+                        await send({"type": "pong"})
+                    elif update.get("type") == "profiles":
                         selected = update.get("profiles", [])
                         if not isinstance(selected, list) or len(selected) > 10 or not all(isinstance(p, str) for p in selected):
                             await ws.close(4400)
